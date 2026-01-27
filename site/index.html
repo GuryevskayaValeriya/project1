@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЕГЭ Обществознание: План обучения</title>
+    <script src="theory.js"></script> <!-- Подключение данных -->
+    <style>
+        :root {
+            --primary: #2a5298;
+            --secondary: #1e3c72;
+            --success: #27ae60;
+            --warning: #f1c40f;
+            --error: #e74c3c;
+            --bg: #f4f7f6;
+            --text: #333;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 20px; }
+        
+        .container { max-width: 900px; margin: 0 auto; }
+        
+        header { 
+            background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            text-align: center; margin-bottom: 30px; 
+        }
+        h1 { color: var(--secondary); margin-bottom: 10px; }
+        
+        /* Навигация по месяцам */
+        .month-nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background: white; padding: 15px 25px; border-radius: 12px; margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        .nav-btn { 
+            background: var(--primary); color: white; border: none; width: 40px; height: 40px; 
+            border-radius: 50%; cursor: pointer; font-size: 1.2rem; transition: 0.2s; 
+        }
+        .nav-btn:hover { transform: scale(1.1); }
+        .month-title { font-size: 1.5rem; font-weight: bold; color: var(--secondary); }
+
+        /* Стили списка недель */
+        .weeks-container { display: flex; flex-direction: column; gap: 15px; }
+        
+        .week-card { 
+            background: white; border-radius: 12px; overflow: hidden; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05); transition: 0.3s;
+        }
+        
+        /* Шапка недели */
+        .week-header { 
+            padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; 
+            background: white; border-left: 5px solid #ddd; transition: 0.2s;
+        }
+        .week-header:hover { background: #fcfcfc; }
+        
+        .week-info h3 { font-size: 1.1rem; margin-bottom: 5px; color: var(--secondary); }
+        .week-desc { font-size: 0.9rem; color: #666; }
+        
+        .week-meta { display: flex; align-items: center; gap: 15px; text-align: right; }
+        
+        /* --- КРУЖОК ПРОГРЕССА --- */
+        .progress-circle { 
+            width: 55px; height: 55px; 
+            border-radius: 50%; 
+            background: conic-gradient(var(--p-color) var(--p-percent), #eee 0);
+            display: flex; align-items: center; justify-content: center; 
+            position: relative;
+            transition: background 0.5s ease;
+        }
+        .progress-circle::after {
+            content: "";
+            position: absolute; width: 45px; height: 45px;
+            background: white; border-radius: 50%;
+        }
+        .progress-text {
+            position: relative; z-index: 1; font-size: 0.8rem; font-weight: bold; color: #333;
+        }
+
+        .arrow { font-size: 1.2rem; color: #999; transition: 0.3s; }
+        
+        /* Раскрытый контент */
+        .week-content { 
+            max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; 
+            background: #fafafa; border-top: 1px solid #eee;
+        }
+        .content-inner { padding: 25px; }
+
+        /* Активное состояние */
+        .week-card.active .week-header { border-left-color: var(--primary); }
+        .week-card.active .arrow { transform: rotate(180deg); color: var(--primary); }
+        .week-card.active .week-content { max-height: 3000px; transition: max-height 0.6s ease-in; }
+
+        /* Внутри недели */
+        .goal-box { 
+            background: #e3f2fd; color: #1565c0; padding: 15px; border-radius: 8px; 
+            margin-bottom: 25px; font-weight: 500;
+        }
+
+        .topic-block { margin-bottom: 30px; background: white; padding: 20px; border-radius: 10px; border: 1px solid #eee; }
+        .topic-title { 
+            font-size: 1.1rem; color: var(--primary); border-bottom: 2px solid #eee; 
+            padding-bottom: 10px; margin-bottom: 15px; 
+        }
+
+        /* Теория */
+        .theory-spoiler { margin-bottom: 20px; }
+        .theory-btn { 
+            background: #6c757d; color: white; border: none; padding: 8px 15px; 
+            border-radius: 5px; cursor: pointer; font-size: 0.9rem; 
+        }
+        .theory-content { display: none; margin-top: 15px; line-height: 1.6; border-left: 3px solid #6c757d; padding-left: 15px; }
+        
+        /* Задания */
+        .task-card { margin-bottom: 15px; padding: 15px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; transition: 0.3s; }
+        .task-card.correct { border-color: var(--success); background: #e8f8f5; }
+        .task-card.incorrect { border-color: var(--error); background: #fdedec; }
+        
+        .task-q { font-weight: 600; margin-bottom: 10px; }
+        .options-list label { display: block; margin-bottom: 8px; cursor: pointer; }
+        .input-group { display: flex; gap: 10px; margin-top: 10px; }
+        .input-answer { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 5px; }
+        .check-btn { 
+            background: var(--primary); color: white; border: none; padding: 8px 15px; 
+            border-radius: 5px; cursor: pointer; 
+        }
+        
+        .status-msg { font-size: 0.85rem; margin-top: 5px; font-weight: bold; }
+        .msg-success { color: var(--success); }
+        .msg-error { color: var(--error); }
+        
+        .img-place {
+            background: #eee; color: #777; padding: 20px; text-align: center; 
+            border-radius: 8px; border: 2px dashed #ccc; margin: 10px 0;
+        }
+
+        @media (max-width: 600px) {
+            .week-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .week-meta { width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🎓 План подготовки к ЕГЭ</h1>
+        <p>Системный курс: теория + тесты + практика</p>
+    </header>
+
+    <div class="month-nav">
+        <button class="nav-btn" onclick="changeMonth(-1)">←</button>
+        <div class="month-title" id="monthDisplay">Сентябрь</div>
+        <button class="nav-btn" onclick="changeMonth(1)">→</button>
+    </div>
+
+    <div class="weeks-container" id="weeksList">
+        <!-- Сюда будут генерироваться недели -->
+    </div>
+</div>
+
+<script>
+    const months = ["Сентябрь", "Октябрь", "Ноябрь", "Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май"];
+    let currentMonthIdx = 0;
+    
+    let userProgress = JSON.parse(localStorage.getItem('ege_progress_v2') || '{}');
+
+    function renderWeeks() {
+        const container = document.getElementById('weeksList');
+        document.getElementById('monthDisplay').textContent = months[currentMonthIdx];
+        container.innerHTML = '';
+
+        for (let w = 0; w < 4; w++) {
+            // Расчет сквозного номера недели (1, 2, 3... 36)
+            const globalWeekNum = (currentMonthIdx * 4) + w + 1;
+            
+            // Определяем темы для этой недели
+            const topicStart = (globalWeekNum - 1) * 2;
+            const weekTopics = allTopics.slice(topicStart, topicStart + 2);
+            
+            if (weekTopics.length === 0) continue;
+
+            const progressData = calculateWeekProgress(weekTopics);
+            const color = getProgressColor(progressData.percent);
+            const styleString = `--p-color: ${color}; --p-percent: ${progressData.percent}%`;
+
+            const weekCard = document.createElement('div');
+            weekCard.className = 'week-card';
+            weekCard.id = `week-card-${globalWeekNum}`; 
+            
+            weekCard.innerHTML = `
+                <div class="week-header" onclick="toggleWeek(this)">
+                    <div class="week-info">
+                        <!-- ИСПОЛЬЗУЕМ globalWeekNum ДЛЯ ОТОБРАЖЕНИЯ -->
+                        <h3>Неделя ${globalWeekNum}</h3>
+                        <div class="week-desc">${weekTopics.map(t => t.title).join(', ')}</div>
+                    </div>
+                    <div class="week-meta">
+                        <div class="progress-circle" id="circle-${globalWeekNum}" style="${styleString}">
+                            <span class="progress-text">${Math.round(progressData.percent)}%</span>
+                        </div>
+                        <div class="arrow">▼</div>
+                    </div>
+                </div>
+                <div class="week-content">
+                    <div class="content-inner">
+                        <div class="goal-box">
+                            🎯 <strong>Цель:</strong> Изучить темы "${weekTopics.map(t => t.title).join('" и "')}".
+                        </div>
+                        <div id="topics-container-${globalWeekNum}"></div>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(weekCard);
+
+            const topicsContainer = weekCard.querySelector(`#topics-container-${globalWeekNum}`);
+            weekTopics.forEach(topic => {
+                topicsContainer.appendChild(createTopicElement(topic));
+            });
+        }
+    }
+
+    function getProgressColor(percent) {
+        if (percent < 40) return '#e74c3c'; // Красный
+        if (percent < 80) return '#f1c40f'; // Желтый
+        return '#27ae60'; // Зеленый
+    }
+
+    function createTopicElement(topic) {
+        const div = document.createElement('div');
+        div.className = 'topic-block';
+        
+        let tasksHTML = '';
+        
+        if (topic.tasks && topic.tasks.tests) {
+            topic.tasks.tests.forEach((test, idx) => {
+                const taskId = `${topic.id}_test_${idx}`;
+                const isDone = userProgress[taskId] === true;
+                tasksHTML += `
+                    <div class="task-card ${isDone ? 'correct' : ''}" id="card-${taskId}">
+                        <div class="task-q">📝 Тест ${idx + 1}: ${test.question}</div>
+                        <div class="options-list">
+                            ${test.options.map((opt, optIdx) => `
+                                <label>
+                                    <input type="radio" name="${taskId}" value="${optIdx}" ${isDone ? 'disabled' : ''}> 
+                                    ${opt}
+                                </label>
+                            `).join('')}
+                        </div>
+                        ${!isDone ? `<button class="check-btn" onclick="checkTest('${topic.id}', ${idx}, ${test.correct})">Проверить</button>` : '<div class="status-msg msg-success">Выполнено верно!</div>'}
+                        <div id="msg-${taskId}" class="status-msg"></div>
+                    </div>
+                `;
+            });
+        }
+
+        if (topic.tasks && topic.tasks.inputs) {
+            topic.tasks.inputs.forEach((inp, idx) => {
+                const taskId = `${topic.id}_input_${idx}`;
+                const isDone = userProgress[taskId] === true;
+                tasksHTML += `
+                    <div class="task-card ${isDone ? 'correct' : ''}" id="card-${taskId}">
+                        <div class="task-q">✍️ Задание ${idx + 1}: ${inp.question}</div>
+                        <div class="input-group">
+                            <input type="text" class="input-answer" id="val-${taskId}" placeholder="Ваш ответ..." ${isDone ? 'disabled value="'+inp.correct[0]+'"' : ''}>
+                            ${!isDone ? `<button class="check-btn" onclick="checkInput('${topic.id}', ${idx})">Ответить</button>` : ''}
+                        </div>
+                        <div id="msg-${taskId}" class="status-msg ${isDone ? 'msg-success' : ''}">${isDone ? 'Выполнено верно!' : ''}</div>
+                    </div>
+                `;
+            });
+        }
+
+        div.innerHTML = `
+            <div class="topic-title">Тема ${topic.id}: ${topic.title}</div>
+            
+            <div class="theory-spoiler">
+                <button class="theory-btn" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'block' ? 'none' : 'block'">
+                    📖 Открыть/Скрыть теорию
+                </button>
+                <div class="theory-content">
+                    ${topic.theoryHTML || '<p>Теория загружается...</p>'}
+                </div>
+            </div>
+
+            <div class="tasks-container">${tasksHTML}</div>
+        `;
+        return div;
+    }
+
+    window.checkTest = function(topicId, testIdx, correctOptionIdx) {
+        const taskId = `${topicId}_test_${testIdx}`;
+        const radios = document.getElementsByName(taskId);
+        let selected = -1;
+        radios.forEach((r, i) => { if(r.checked) selected = i; });
+        const msgBlock = document.getElementById(`msg-${taskId}`);
+        const card = document.getElementById(`card-${taskId}`);
+
+        if (selected === -1) {
+            msgBlock.textContent = "Выберите вариант!";
+            msgBlock.className = "status-msg msg-error";
+            return;
+        }
+
+        if (selected === correctOptionIdx) {
+            msgBlock.textContent = "Верно!";
+            msgBlock.className = "status-msg msg-success";
+            card.className = "task-card correct";
+            saveProgress(taskId, true, topicId);
+        } else {
+            msgBlock.textContent = "Ошибка.";
+            msgBlock.className = "status-msg msg-error";
+            card.className = "task-card incorrect";
+        }
+    };
+
+    window.checkInput = function(topicId, inputIdx) {
+        const topic = allTopics.find(t => t.id === topicId);
+        const correctAnswers = topic.tasks.inputs[inputIdx].correct.map(a => a.toLowerCase().trim());
+        const taskId = `${topicId}_input_${inputIdx}`;
+        const inputVal = document.getElementById(`val-${taskId}`).value.toLowerCase().trim();
+        const msgBlock = document.getElementById(`msg-${taskId}`);
+        const card = document.getElementById(`card-${taskId}`);
+
+        if (correctAnswers.includes(inputVal)) {
+            msgBlock.textContent = "Верно!";
+            msgBlock.className = "status-msg msg-success";
+            card.className = "task-card correct";
+            saveProgress(taskId, true, topicId);
+        } else {
+            msgBlock.textContent = "Ошибка.";
+            msgBlock.className = "status-msg msg-error";
+            card.className = "task-card incorrect";
+        }
+    };
+
+    function saveProgress(taskId, status, topicId) {
+        userProgress[taskId] = status;
+        localStorage.setItem('ege_progress_v2', JSON.stringify(userProgress));
+        
+        // Обновляем кружок без перезагрузки списка
+        const topicIndex = allTopics.findIndex(t => t.id === topicId);
+        if (topicIndex !== -1) {
+            const globalWeekNum = Math.floor(topicIndex / 2) + 1;
+            updateWeekUI(globalWeekNum);
+        }
+    }
+
+    function updateWeekUI(globalWeekNum) {
+        const circle = document.getElementById(`circle-${globalWeekNum}`);
+        if (!circle) return;
+
+        const topicStart = (globalWeekNum - 1) * 2;
+        const weekTopics = allTopics.slice(topicStart, topicStart + 2);
+        const data = calculateWeekProgress(weekTopics);
+        
+        const color = getProgressColor(data.percent);
+        circle.style.setProperty('--p-color', color);
+        circle.style.setProperty('--p-percent', data.percent + '%');
+        
+        const textSpan = circle.querySelector('.progress-text');
+        if(textSpan) textSpan.textContent = Math.round(data.percent) + '%';
+    }
+
+    function calculateWeekProgress(topics) {
+        let totalTasks = 0;
+        let completedTasks = 0;
+
+        topics.forEach(topic => {
+            if (topic.tasks) {
+                if (topic.tasks.tests) {
+                    totalTasks += topic.tasks.tests.length;
+                    topic.tasks.tests.forEach((_, i) => {
+                        if (userProgress[`${topic.id}_test_${i}`]) completedTasks++;
+                    });
+                }
+                if (topic.tasks.inputs) {
+                    totalTasks += topic.tasks.inputs.length;
+                    topic.tasks.inputs.forEach((_, i) => {
+                        if (userProgress[`${topic.id}_input_${i}`]) completedTasks++;
+                    });
+                }
+            }
+        });
+
+        return {
+            percent: totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100
+        };
+    }
+
+    window.toggleWeek = function(header) {
+        const card = header.parentElement;
+        card.classList.toggle('active');
+    };
+
+    window.changeMonth = function(dir) {
+        currentMonthIdx = currentMonthIdx + dir;
+        if (currentMonthIdx < 0) currentMonthIdx = 0;
+        if (currentMonthIdx > 8) currentMonthIdx = 8;
+        renderWeeks();
+    };
+
+    renderWeeks();
+</script>
+
+</body>
+</html>
