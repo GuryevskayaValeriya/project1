@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к ЕГЭ по обществознанию: Сентябрь-Май</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #2a5298;
+        }
+
+        h1 {
+            color: #1e3c72;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: #f0f7ff;
+            padding: 12px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 2px solid #d1e3ff;
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .stat-label {
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .calendar-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 25px 0;
+            padding: 15px;
+            background: #f0f7ff;
+            border-radius: 12px;
+            flex-wrap: wrap;
+            gap: 15px;
+            border: 2px solid #d1e3ff;
+        }
+
+        .month-selector {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .month-btn {
+            background: #1e3c72;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .month-btn:hover {
+            background: #2a5298;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+
+        .current-month {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1e3c72;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .week-header {
+            background: #2a5298;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .day {
+            background: white;
+            border-radius: 10px;
+            padding: 15px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e8f0fe;
+            position: relative;
+            min-height: 110px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .day:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.2);
+            border-color: #2a5298;
+            background: #f8fbff;
+        }
+
+        .day-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 5px;
+        }
+
+        .day-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .week-number {
+            font-size: 0.8rem;
+            color: #2a5298;
+            font-weight: 600;
+            margin: 3px 0;
+            background: #e8f0fe;
+            padding: 2px 6px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        .topic-preview {
+            font-size: 0.75rem;
+            color: #555;
+            line-height: 1.3;
+            margin-top: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .task-type {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .theory {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .test {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .practice {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .completed {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            border-color: #28a745;
+        }
+
+        .today {
+            border: 3px solid #ff6b6b;
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.3);
+            background: #fff9e6;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 15px;
+            overflow: hidden;
+            animation: slideUp 0.4s;
+            border: 3px solid #2a5298;
+        }
+
+        .modal-header {
+            background: linear-gradient(90deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 25px;
+            overflow-y: auto;
+            max-height: 60vh;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .resource-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2a5298;
+            transition: transform 0.3s;
+            border: 1px solid #e9ecef;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-title {
+            color: #1e3c72;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 30px 0;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #1e3c72, #4a90e2);
+            width: 0%;
+            border-radius: 5px;
+            transition: width 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @media (max-width: 1200px) {
+            .calendar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .calendar {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .calendar-controls {
+                flex-direction: column;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 10px;
+            }
+        }
+
+        .legend {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .month-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .month-stat {
+            background: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #dee2e6;
+        }
+
+        .section-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-right: 5px;
+            margin-bottom: 3px;
+        }
+
+        .section-1 { background: #e3f2fd; color: #1565c0; }
+        .section-2 { background: #f3e5f5; color: #7b1fa2; }
+        .section-3 { background: #e8f5e9; color: #2e7d32; }
+        .section-4 { background: #fff3cd; color: #856404; }
+        .section-5 { background: #f8d7da; color: #721c24; }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .controls select {
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #d1e3ff;
+            background: white;
+            color: #1e3c72;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Подготовка к ЕГЭ по обществознанию</h1>
+            <div class="subtitle">Системный план с сентября по май: теория + тесты + практика</div>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">38</div>
+                    <div class="stat-label">Недель подготовки</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">90</div>
+                    <div class="stat-label">Тем по кодификатору</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">114</div>
+                    <div class="stat-label">Тестовых работы</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">273</div>
+                    <div class="stat-label">Дней до экзамена</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="calendar-controls">
+            <div class="month-selector">
+                <button class="month-btn" id="prev-month">← Назад</button>
+                <div class="current-month" id="current-month">Сентябрь</div>
+                <button class="month-btn" id="next-month">Вперёд →</button>
+            </div>
+
+            <div class="controls">
+                <select id="section-filter">
+                    <option value="all">Все разделы</option>
+                    <option value="1">Человек и общество</option>
+                    <option value="2">Экономика</option>
+                    <option value="3">Социальная сфера</option>
+                    <option value="4">Политика</option>
+                    <option value="5">Право</option>
+                </select>
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e3f2fd;"></div>
+                    <span>Теория</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #f3e5f5;"></div>
+                    <span>Тесты</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #e8f5e9;"></div>
+                    <span>Практика</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="month-stats" id="month-stats">
+            <!-- Статистика месяца будет обновляться -->
+        </div>
+
+        <div class="calendar" id="calendar">
+            <!-- Недели будут сгенерированы через JavaScript -->
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; color: #666; font-size: 0.9rem;">
+            <p>📅 Учебный год: сентябрь 2024 - май 2025 | 🎯 Цель: системная подготовка к ЕГЭ</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно с заданиями -->
+    <div class="modal" id="week-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Неделя 1: Человек как результат эволюции</h2>
+                <button class="close-modal" id="close-modal">×</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Контент будет добавлен через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Все темы из вашего списка (90 тем)
+        const topics = [
+            // Раздел 1: Человек и общество (16 тем)
+            {id: 1.1, title: "Человек как результат биологической и социокультурной эволюции", section: 1},
+            {id: 1.2, title: "Личность в современном обществе", section: 1},
+            {id: 1.3, title: "Потребности и интересы", section: 1},
+            {id: 1.4, title: "Мировоззрение, его роль в жизнедеятельности человека", section: 1},
+            {id: 1.5, title: "Общественное и индивидуальное сознание. Самосознание и социальное поведение", section: 1},
+            {id: 1.6, title: "Деятельность и её структура", section: 1},
+            {id: 1.7, title: "Общение как вид деятельности", section: 1},
+            {id: 1.8, title: "Познание мира. Чувственное и рациональное познание", section: 1},
+            {id: 1.9, title: "Мышление, его формы и методы", section: 1},
+            {id: 1.10, title: "Понятие истины, её критерии. Абсолютная, относительная истина", section: 1},
+            {id: 1.11, title: "Общество как система. Общественные отношения", section: 1},
+            {id: 1.12, title: "Общественные потребности и социальные институты", section: 1},
+            {id: 1.13, title: "Многообразие путей и форм общественного развития", section: 1},
+            {id: 1.14, title: "Эволюция, социальная революция. Реформа. Общественный прогресс", section: 1},
+            {id: 1.15, title: "Глобализация и её противоречивые последствия", section: 1},
+            {id: 1.16, title: "Духовные ценности российского общества", section: 1},
+
+            // Раздел 2: Экономика (18 тем)
+            {id: 2.1, title: "Роль экономики в жизни общества", section: 2},
+            {id: 2.2, title: "Экономические институты и их роль в развитии общества", section: 2},
+            {id: 2.3, title: "Типы экономических систем. Ограниченность ресурсов", section: 2},
+            {id: 2.4, title: "Экономическая деятельность и её субъекты", section: 2},
+            {id: 2.5, title: "Рациональное поведение людей в экономике", section: 2},
+            {id: 2.6, title: "Рынок. Рыночные механизмы: цена и конкуренция", section: 2},
+            {id: 2.7, title: "Типы рыночных структур. Совершенная и несовершенная конкуренция", section: 2},
+            {id: 2.8, title: "Рынок труда. Заработная плата и стимулирование труда", section: 2},
+            {id: 2.9, title: "Занятость и безработица. Причины и виды безработицы", section: 2},
+            {id: 2.10, title: "Предприятие (фирма) в экономике. Цели предприятия", section: 2},
+            {id: 2.11, title: "Способы и источники финансирования предприятий", section: 2},
+            {id: 2.12, title: "Институт предпринимательства и его роль в экономике", section: 2},
+            {id: 2.13, title: "Малый бизнес. Поддержка малого и среднего предпринимательства", section: 2},
+            {id: 2.14, title: "Фондовый рынок", section: 2},
+            {id: 2.15, title: "Финансовый рынок, виды и функции. Банковская система", section: 2},
+            {id: 2.16, title: "Финансовые услуги. Вклады и кредиты", section: 2},
+            {id: 2.17, title: "Инфляция: причины, виды, социально-экономические последствия", section: 2},
+            {id: 2.18, title: "Несовершенства рыночной организации хозяйства", section: 2},
+
+            // Раздел 3: Социальная сфера (8 тем)
+            {id: 3.1, title: "Социальные общности, группы, их типы", section: 3},
+            {id: 3.2, title: "Социальная стратификация, её критерии. Социальное неравенство", section: 3},
+            {id: 3.3, title: "Социальная структура российского общества", section: 3},
+            {id: 3.4, title: "Этнические общности. Этнические отношения", section: 3},
+            {id: 3.5, title: "Молодёжь как социальная группа, её характеристики", section: 3},
+            {id: 3.6, title: "Положение индивида в обществе. Социальные статусы и роли", section: 3},
+            {id: 3.7, title: "Семья и брак. Функции и типы семьи", section: 3},
+            {id: 3.8, title: "Социализация личности и её этапы", section: 3},
+
+            // Раздел 4: Политическая сфера (12 тем)
+            {id: 4.1, title: "Политическая власть и субъекты политики в современном обществе", section: 4},
+            {id: 4.2, title: "Политическая система общества, её структура и функции", section: 4},
+            {id: 4.3, title: "Государство как основной институт политической системы", section: 4},
+            {id: 4.4, title: "Понятие формы государства. Формы правления", section: 4},
+            {id: 4.5, title: "Политический режим. Демократия и её формы", section: 4},
+            {id: 4.6, title: "Гражданское общество", section: 4},
+            {id: 4.7, title: "Федеративное устройство Российской Федерации", section: 4},
+            {id: 4.8, title: "Субъекты государственной власти в Российской Федерации", section: 4},
+            {id: 4.9, title: "Обеспечение национальной безопасности в Российской Федерации", section: 4},
+            {id: 4.10, title: "Политическая культура общества и личности", section: 4},
+            {id: 4.11, title: "Политические партии как субъекты политики", section: 4},
+            {id: 4.12, title: "Избирательная система. Типы избирательных систем", section: 4},
+
+            // Раздел 5: Право (12 тем)
+            {id: 5.1, title: "Право как социальный институт. Понятие, признаки и функции права", section: 5},
+            {id: 5.2, title: "Источники права: нормативный правовой акт, нормативный договор", section: 5},
+            {id: 5.3, title: "Система права. Отрасли права", section: 5},
+            {id: 5.4, title: "Понятие и признаки правоотношений", section: 5},
+            {id: 5.5, title: "Понятие и виды юридической ответственности", section: 5},
+            {id: 5.6, title: "Гражданство Российской Федерации", section: 5},
+            {id: 5.7, title: "Конституция Российской Федерации", section: 5},
+            {id: 5.8, title: "Личные, политические, социально-экономические права", section: 5},
+            {id: 5.9, title: "Гражданское право. Гражданские правоотношения", section: 5},
+            {id: 5.10, title: "Семейное право. Порядок и условия заключения брака", section: 5},
+            {id: 5.11, title: "Трудовое право. Трудовые правоотношения", section: 5},
+            {id: 5.12, title: "Защита прав человека в Российской Федерации", section: 5}
+        ];
+
+        // Месяцы учебного года (с сентября по май)
+        const months = [
+            {name: "Сентябрь", weeks: 4},
+            {name: "Октябрь", weeks: 4},
+            {name: "Ноябрь", weeks: 5},
+            {name: "Декабрь", weeks: 4},
+            {name: "Январь", weeks: 4},
+            {name: "Февраль", weeks: 4},
+            {name: "Март", weeks: 5},
+            {name: "Апрель", weeks: 4},
+            {name: "Май", weeks: 4}
+        ];
+
+        const totalWeeks = months.reduce((sum, month) => sum + month.weeks, 0);
+        let currentMonthIndex = 0;
+        let currentSectionFilter = 'all';
+        const today = new Date();
+        const startDate = new Date(2024, 8, 1); // 1 сентября 2024
+
+        // Хранилище выполненных недель
+        let completedWeeks = JSON.parse(localStorage.getItem('completedWeeks') || '[]');
+
+        // Создаем календарь недель
+        function createCalendar() {
+            const calendar = document.getElementById('calendar');
+            const currentMonthEl = document.getElementById('current-month');
+            const monthStatsEl = document.getElementById('month-stats');
+
+            // Очищаем календарь
+            calendar.innerHTML = '';
+
+            // Обновляем заголовок
+            const currentMonth = months[currentMonthIndex];
+            currentMonthEl.textContent = currentMonth.name;
+
+            // Создаем заголовки дней недели
+            const weekDays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+            weekDays.forEach(day => {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'week-header';
+                dayEl.textContent = day;
+                calendar.appendChild(dayEl);
+            });
+
+            // Рассчитываем начальную неделю для месяца
+            let startWeek = 1;
+            for (let i = 0; i < currentMonthIndex; i++) {
+                startWeek += months[i].weeks;
+            }
+
+            // Создаем дни для текущего месяца
+            let completedInMonth = 0;
+            let totalDaysInMonth = currentMonth.weeks * 7;
+
+            for (let week = 0; week < currentMonth.weeks; week++) {
+                const globalWeekIndex = startWeek + week;
+
+                for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+                    const dayEl = document.createElement('div');
+                    const dayNumber = week * 7 + dayOfWeek + 1;
+
+                    // Пропускаем несуществующие дни (для равномерного отображения)
+                    if (dayNumber > totalDaysInMonth) {
+                        dayEl.style.visibility = 'hidden';
+                        calendar.appendChild(dayEl);
+                        continue;
+                    }
+
+                    // Получаем тему для этой недели (каждой неделе - новая тема)
+                    const topicIndex = (globalWeekIndex - 1) % topics.length;
+                    const topic = topics[topicIndex];
+
+                    // Фильтрация по разделу
+                    if (currentSectionFilter !== 'all' && topic.section.toString() !== currentSectionFilter) {
+                        dayEl.style.display = 'none';
+                    }
+
+                    dayEl.className = 'day';
+                    dayEl.dataset.week = globalWeekIndex;
+                    dayEl.dataset.section = topic.section;
+
+                    // Рассчитываем дату
+                    const daysFromStart = (globalWeekIndex - 1) * 7 + dayOfWeek;
+                    const currentDate = new Date(startDate);
+                    currentDate.setDate(startDate.getDate() + daysFromStart);
+
+                    const dateNumber = currentDate.getDate();
+                    const isToday = currentDate.toDateString() === today.toDateString();
+
+                    // Определяем тип задания для дня
+                    let taskType = '';
+                    let taskLabel = '';
+                    let taskEmoji = '';
+
+                    switch (dayOfWeek) {
+                        case 0: case 2: case 4: // Пн, Ср, Пт
+                            taskType = 'theory';
+                            taskLabel = 'Теория';
+                            taskEmoji = '📚';
+                            break;
+                        case 1: case 3: case 5: // Вт, Чт, Сб
+                            taskType = 'test';
+                            taskLabel = 'Тест';
+                            taskEmoji = '📝';
+                            break;
+                        case 6: // Вс
+                            taskType = 'practice';
+                            taskLabel = 'Практика';
+                            taskEmoji = '✍️';
+                            break;
+                    }
+
+                    // Проверяем, выполнена ли неделя
+                    const isCompleted = completedWeeks.includes(globalWeekIndex);
+                    if (isCompleted) {
+                        dayEl.classList.add('completed');
+                        if (dayOfWeek === 0) completedInMonth++; // Считаем только по понедельникам
+                    }
+
+                    if (isToday) {
+                        dayEl.classList.add('today');
+                    }
+
+                    // Создаем превью темы (первые 3-4 слова)
+                    const topicWords = topic.title.split(' ');
+                    const topicPreview = topicWords.slice(0, 4).join(' ') + (topicWords.length > 4 ? '...' : '');
+
+                    dayEl.innerHTML = `
+                        <div class="day-number">${dateNumber}</div>
+                        <div class="day-content">
+                            <div class="week-number">Неделя ${globalWeekIndex}</div>
+                            <span class="section-tag section-${topic.section}">
+                                ${topic.section === 1 ? 'Человек' :
+                                  topic.section === 2 ? 'Экономика' :
+                                  topic.section === 3 ? 'Социальное' :
+                                  topic.section === 4 ? 'Политика' : 'Право'}
+                            </span>
+                            <div class="task-type ${taskType}">${taskEmoji} ${taskLabel}</div>
+                            <div class="topic-preview" title="${topic.title}">${topicPreview}</div>
+                        </div>
+                    `;
+
+                    // Добавляем обработчик клика
+                    dayEl.addEventListener('click', () => openWeek(globalWeekIndex, topic));
+
+                    calendar.appendChild(dayEl);
+                }
+            }
+
+            // Обновляем статистику месяца
+            const completionRate = Math.round((completedInMonth / currentMonth.weeks) * 100);
+            monthStatsEl.innerHTML = `
+                <div class="month-stat">Недель в месяце: ${currentMonth.weeks}</div>
+                <div class="month-stat">Выполнено: ${completedInMonth}</div>
+                <div class="month-stat" style="color: ${completionRate >= 80 ? '#28a745' : completionRate >= 50 ? '#ffc107' : '#dc3545'};">
+                    Прогресс: ${completionRate}%
+                </div>
+            `;
+
+            // Обновляем прогресс
+            updateProgress();
+        }
+
+        // Открываем информацию о неделе
+        function openWeek(weekNumber, topic) {
+            const modal = document.getElementById('week-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+
+            const topicIndex = topics.findIndex(t => t.id === topic.id);
+            const nextTopic = topics[(topicIndex + 1) % topics.length];
+
+            modalTitle.textContent = `Неделя ${weekNumber}: ${topic.title}`;
+
+            // Ресурсы для разных разделов
+            const sectionResources = {
+                1: [
+                    {title: "📘 Боголюбов Л.Н. 'Обществознание'", link: "https://obrazovaka.ru/obschestvoznanie"},
+                    {title: "🎬 Видеоуроки по человеку и обществу", link: "https://foxford.ru/wiki/obschestvoznanie"},
+                    {title: "📊 Схемы и таблицы по разделу", link: "https://soc-ege.sdamgia.ru"}
+                ],
+                2: [
+                    {title: "💰 Учебник по экономике", link: "https://interneturok.ru/lesson/economy"},
+                    {title: "📈 Задачи по экономике", link: "https://ege.sdamgia.ru"},
+                    {title: "🏦 Банковская система РФ", link: "https://cbr.ru"}
+                ],
+                3: [
+                    {title: "👥 Социальная стратификация", link: "https://sociology.about.com"},
+                    {title: "👨‍👩‍👧 Семейное право", link: "https://www.garant.ru"},
+                    {title: "🎓 Молодёжная политика", link: "https://fadm.gov.ru"}
+                ],
+                4: [
+                    {title: "🏛️ Политическая система РФ", link: "https://constitution.kremlin.ru"},
+                    {title: "🗳️ Избирательная система", link: "https://cikrf.ru"},
+                    {title: "📰 Политические партии", link: "https://minjust.gov.ru"}
+                ],
+                5: [
+                    {title: "⚖️ Конституция РФ", link: "https://constitution.kremlin.ru"},
+                    {title: "📋 Кодексы РФ", link: "https://www.consultant.ru"},
+                    {title: "👮 Права человека", link: "https://ombudsmanrf.org"}
+                ]
+            };
+
+            modalBody.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+                        <span class="section-tag section-${topic.section}" style="font-size: 1rem;">
+                            ${topic.section === 1 ? 'Человек и общество' :
+                              topic.section === 2 ? 'Экономика' :
+                              topic.section === 3 ? 'Социальная сфера' :
+                              topic.section === 4 ? 'Политическая сфера' : 'Право'}
+                        </span>
+                        <span style="color: #666; font-size: 0.9rem;">Неделя ${weekNumber} из ${totalWeeks}</span>
+                    </div>
+
+                    <h3 style="color: #1e3c72; margin-bottom: 15px;">🎯 План недели</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
+                        <div style="background: #e3f2fd; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #1565c0; margin-bottom: 8px;">📚 Теория (3 дня)</h4>
+                            <ul style="padding-left: 20px; font-size: 0.9rem;">
+                                <li>Изучить теорию</li>
+                                <li>Составить конспект</li>
+                                <li>Выучить термины</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f3e5f5; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #7b1fa2; margin-bottom: 8px;">📝 Тесты (3 дня)</h4>
+                            <ul style="padding-left: 20px; font-size: 0.9rem;">
+                                <li>Часть 1 ЕГЭ</li>
+                                <li>Часть 2 ЕГЭ</li>
+                                <li>Анализ ошибок</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #e8f5e9; padding: 15px; border-radius: 10px;">
+                            <h4 style="color: #2e7d32; margin-bottom: 8px;">✍️ Практика (1 день)</h4>
+                            <ul style="padding-left: 20px; font-size: 0.9rem;">
+                                <li>Мини-сочинение</li>
+                                <li>Разбор заданий</li>
+                                <li>Повторение</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin: 25px 0;">
+                    <h3 style="color: #1e3c72; margin-bottom: 15px;">📖 Ресурсы для изучения</h3>
+                    <div class="resources">
+                        ${sectionResources[topic.section].map(resource => `
+                            <div class="resource-card">
+                                <div class="resource-title">
+                                    <span>${resource.title}</span>
+                                </div>
+                                <p style="font-size: 0.9rem; color: #666; margin-bottom: 10px;">Открыть материал по теме</p>
+                                <a href="${resource.link}" target="_blank"
+                                   style="color: #1e3c72; text-decoration: none; font-weight: bold; font-size: 0.9rem; display: inline-block; padding: 8px 15px; background: #f0f7ff; border-radius: 6px; border: 1px solid #d1e3ff;">
+                                    Открыть ресурс →
+                                </a>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div style="background: #fff3cd; padding: 15px; border-radius: 10px; margin-top: 25px;">
+                    <h4 style="color: #856404; margin-bottom: 10px;">📌 Подготовка к следующей неделе</h4>
+                    <p>Следующая тема: <strong>${nextTopic.title}</strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 8px; color: #856404;">
+                        Рекомендуем начать знакомиться с материалами заранее.
+                    </p>
+                </div>
+
+                <div style="margin-top: 30px; text-align: center;">
+                    <button id="complete-week"
+                            style="background: ${completedWeeks.includes(weekNumber) ? '#28a745' : '#1e3c72'};
+                                   color: white; border: none; padding: 12px 35px; border-radius: 8px;
+                                   font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s;">
+                        ${completedWeeks.includes(weekNumber) ? '✅ Неделя выполнена' : '✅ Отметить как выполненную'}
+                    </button>
+                    <p style="color: #666; font-size: 0.9rem; margin-top: 10px;">
+                        ${completedWeeks.includes(weekNumber) ?
+                          'Отличная работа! Эта неделя уже выполнена.' :
+                          'После выполнения всех заданий нажмите эту кнопку'}
+                    </p>
+                </div>
+            `;
+
+            // Добавляем обработчик для кнопки завершения
+            const completeBtn = document.getElementById('complete-week');
+            if (completeBtn && !completedWeeks.includes(weekNumber)) {
+                completeBtn.addEventListener('click', () => {
+                    completedWeeks.push(weekNumber);
+                    localStorage.setItem('completedWeeks', JSON.stringify(completedWeeks));
+                    alert(`Неделя ${weekNumber} отмечена как выполненная! 🎉\nПрогресс: ${Math.round((completedWeeks.length / totalWeeks) * 100)}%`);
+                    modal.style.display = 'none';
+                    createCalendar(); // Обновляем календарь
+                });
+            }
+
+            modal.style.display = 'flex';
+        }
+
+        // Обновляем прогресс-бар
+        function updateProgress() {
+            const progress = (completedWeeks.length / totalWeeks) * 100;
+            const progressBar = document.getElementById('progress');
+            progressBar.style.width = `${progress}%`;
+        }
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', () => {
+            createCalendar();
+
+            // Обработчики для кнопок месяцев
+            document.getElementById('prev-month').addEventListener('click', () => {
+                currentMonthIndex = (currentMonthIndex - 1 + months.length) % months.length;
+                createCalendar();
+            });
+
+            document.getElementById('next-month').addEventListener('click', () => {
+                currentMonthIndex = (currentMonthIndex + 1) % months.length;
+                createCalendar();
+            });
+
+            // Фильтр по разделам
+            document.getElementById('section-filter').addEventListener('change', (e) => {
+                currentSectionFilter = e.target.value;
+                createCalendar();
+            });
+
+            // Закрытие модального окна
+            document.getElementById('close-modal').addEventListener('click', () => {
+                document.getElementById('week-modal').style.display = 'none';
+            });
+
+            // Закрытие по клику вне окна
+            document.getElementById('week-modal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('week-modal')) {
+                    document.getElementById('week-modal').style.display = 'none';
+                }
+            });
+
+            // Горячие клавиши
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.getElementById('week-modal').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
