@@ -31,7 +31,9 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
@@ -778,6 +780,19 @@
 
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(135deg, #5568d3 0%, #653a91 100%);
+        }
+
+        /* Gradient animation */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         /* Animation for progress text */
