@@ -123,7 +123,7 @@
         }
 
         .nav-btn:hover {
-            transform: scale(1.1) rotate(180deg);
+            transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
@@ -171,6 +171,10 @@
             border-left: 6px solid var(--border);
             transition: all 0.3s ease;
             position: relative;
+        }
+
+        .week-header:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
         }
 
         .week-header::before {
@@ -249,35 +253,32 @@
             font-weight: bold;
         }
 
-        /* Active state - КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ: убираем ограничение высоты */
-        .week-card.active .week-header {
-            border-left-color: var(--primary);
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+        .study-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
-        .week-card.active .arrow {
-            transform: rotate(180deg);
-            color: var(--primary);
+        .study-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
         }
 
-        .week-card.active .week-content {
-            max-height: none; /* УБИРАЕМ ОГРАНИЧЕНИЕ ВЫСОТЫ! */
-            padding: 0;
-            overflow: visible;
+        .study-btn:active {
+            transform: translateY(1px);
         }
 
-        /* Week content - КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ */
+
+        /* Week content - Hidden since we navigate to separate pages */
         .week-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
-            background: #fafbfc;
-            border-top: 2px solid var(--border);
-            padding: 0 35px; /* Анимируем отступы */
-        }
-
-        .content-inner {
-            padding: 35px 0; /* Убираем горизонтальные отступы, они теперь в week-content */
+            display: none;
         }
 
         /* Goal box */
@@ -1434,7 +1435,7 @@
                 <li><strong>Целостность</strong> — целостные, образные представления о мире;</li>
                 <li><strong>Определяет личность</strong> — отражает облик человека и его отношение к миру, определяет общую направленность личности;</li>
                 <li><strong>Связь с убеждениями</strong> — тесно взаимосвязано с убеждениями;</li>
-                <li><strong>Участие сознания</strong> — активное участие сознания в формировании мировоззрения.</li>
+                <li><strong>Участие сознания</strong> — активное участие сознания в формиро����ании мировоззрения.</li>
             </ul>
 
             <h3>6. Формы мировоззрения</h3>
@@ -1445,7 +1446,7 @@
                 </div>
                 <div class="classification-card">
                     <h5>🖼️ Мировосприятие</h5>
-                    <p>Образ мира в наглядных представлениях, содержит рассуждения и абстрактные понятия.</p>
+                    <p>Образ мира в на��лядных представлениях, содержит рассуждения и абстрактные понятия.</p>
                 </div>
                 <div class="classification-card">
                     <h5>🧠 Миропонимание</h5>
@@ -1850,7 +1851,7 @@
                 weekCard.id = `week-card-${globalWeekNum}`;
 
                 weekCard.innerHTML = `
-                    <div class="week-header" onclick="toggleWeek(this)">
+                    <div class="week-header" onclick="goToWeek(${globalWeekNum})">
                         <div class="week-info">
                             <h3>📅 Неделя ${globalWeekNum}</h3>
                             <div class="week-desc">${weekTopics.map(t => t.title).join(', ')}</div>
@@ -1859,25 +1860,12 @@
                             <div class="progress-circle" id="circle-${globalWeekNum}" style="${styleString}">
                                 <span class="progress-text ${progressData.percent === 100 ? 'complete' : ''}">${Math.round(progressData.percent)}%</span>
                             </div>
-                            <div class="arrow">▼</div>
-                        </div>
-                    </div>
-                    <div class="week-content">
-                        <div class="content-inner">
-                            <div class="goal-box">
-                                🎯 <strong>Цель недели:</strong> Изучить темы "${weekTopics.map(t => t.title).join('" и "')}" и выполнить все задания.
-                            </div>
-                            <div id="topics-container-${globalWeekNum}"></div>
+                            <button class="study-btn">Приступить к изучению</button>
                         </div>
                     </div>
                 `;
 
                 container.appendChild(weekCard);
-
-                const topicsContainer = weekCard.querySelector(`#topics-container-${globalWeekNum}`);
-                weekTopics.forEach(topic => {
-                    topicsContainer.appendChild(createTopicElement(topic));
-                });
             }
         }
 
@@ -2027,6 +2015,11 @@
             }
         }
 
+        function goToWeek(weekNumber) {
+            // Redirect to the corresponding week page
+            window.location.href = `week${weekNumber}.html`;
+        }
+
         function updateWeekUI(globalWeekNum) {
             const circle = document.getElementById(`circle-${globalWeekNum}`);
             if (!circle) return;
@@ -2080,23 +2073,6 @@
             };
         }
 
-        window.toggleWeek = function(header) {
-            const card = header.parentElement;
-            const isActive = card.classList.contains('active');
-
-            // Close all other weeks
-            document.querySelectorAll('.week-card').forEach(w => {
-                if (w !== card) w.classList.remove('active');
-            });
-
-            // Toggle current week
-            card.classList.toggle('active');
-
-            // Прокручиваем к открытой неделе
-            if (card.classList.contains('active')) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        };
 
         window.changeMonth = function(dir) {
             currentMonthIdx = currentMonthIdx + dir;
