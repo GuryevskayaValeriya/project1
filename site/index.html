@@ -31,10 +31,24 @@
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             color: var(--text-primary);
             min-height: 100vh;
             padding: 20px;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
@@ -111,24 +125,49 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1.5rem;
+            font-size: 2rem;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
             position: relative;
             z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            box-sizing: border-box;
+            vertical-align: middle;
+            text-decoration: none;
+        }
+
+        .nav-btn span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            margin-top: -10px;
         }
 
         .nav-btn:hover {
-            transform: scale(1.1) rotate(180deg);
+            transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
 
         .nav-btn:active {
-            transform: scale(0.95);
+            transform: translateY(1px);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .month-title {
@@ -137,6 +176,15 @@
             color: var(--secondary);
             position: relative;
             z-index: 1;
+            text-align: center;
+            flex-grow: 1;
+            margin: 0 20px;
+            transition: all 0.3s ease;
+        }
+
+        .month-title.transitioning {
+            opacity: 0.7;
+            transform: scale(0.95);
         }
 
         /* Week cards */
@@ -173,6 +221,10 @@
             position: relative;
         }
 
+        .week-header:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+        }
+
         .week-header::before {
             content: "";
             position: absolute;
@@ -187,6 +239,14 @@
 
         .week-header:hover::before {
             opacity: 1;
+        }
+
+        .week-info {
+            flex: 1;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .week-info h3 {
@@ -207,12 +267,17 @@
             align-items: center;
             gap: 20px;
             text-align: right;
+            flex-shrink: 0;
         }
 
         /* Progress circle with animation */
         .progress-circle {
             width: 70px;
             height: 70px;
+            min-width: 70px;
+            min-height: 70px;
+            max-width: 70px;
+            max-height: 70px;
             border-radius: 50%;
             background: conic-gradient(var(--p-color) var(--p-percent), #e2e8f0 0);
             display: flex;
@@ -228,6 +293,10 @@
             position: absolute;
             width: 58px;
             height: 58px;
+            min-width: 58px;
+            min-height: 58px;
+            max-width: 58px;
+            max-height: 58px;
             background: var(--bg-card);
             border-radius: 50%;
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
@@ -240,6 +309,11 @@
             font-weight: 800;
             color: var(--text-primary);
             text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
         }
 
         .arrow {
@@ -249,35 +323,32 @@
             font-weight: bold;
         }
 
-        /* Active state - КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ: убираем ограничение высоты */
-        .week-card.active .week-header {
-            border-left-color: var(--primary);
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+        .study-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
-        .week-card.active .arrow {
-            transform: rotate(180deg);
-            color: var(--primary);
+        .study-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(102, 126, 234, 0.4);
         }
 
-        .week-card.active .week-content {
-            max-height: none; /* УБИРАЕМ ОГРАНИЧЕНИЕ ВЫСОТЫ! */
-            padding: 0;
-            overflow: visible;
+        .study-btn:active {
+            transform: translateY(1px);
         }
 
-        /* Week content - КРИТИЧЕСКОЕ ИЗМЕНЕНИЕ */
+
+        /* Week content - Hidden since we navigate to separate pages */
         .week-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), padding 0.5s ease;
-            background: #fafbfc;
-            border-top: 2px solid var(--border);
-            padding: 0 35px; /* Анимируем отступы */
-        }
-
-        .content-inner {
-            padding: 35px 0; /* Убираем горизонтальные отступы, они теперь в week-content */
+            display: none;
         }
 
         /* Goal box */
@@ -1016,9 +1087,9 @@
         </header>
 
         <div class="month-nav">
-            <button class="nav-btn" onclick="changeMonth(-1)">←</button>
+            <button class="nav-btn" onclick="changeMonth(-1)"><span>‹</span></button>
             <div class="month-title" id="monthDisplay">Сентябрь</div>
-            <button class="nav-btn" onclick="changeMonth(1)">→</button>
+            <button class="nav-btn" onclick="changeMonth(1)"><span>›</span></button>
         </div>
 
         <div class="weeks-container" id="weeksList">
@@ -1407,7 +1478,7 @@
             <h3>3. Уровни мировоззрения</h3>
             <div class="comparison-grid">
                 <div class="comparison-card comparison-card-orange">
-                    <h4>📖 Обыденно-практический</h4>
+                    <h4>���� Обыденно-практический</h4>
                     <p>Открытая, изменчивая совокупность эмоционально окрашенных взглядов.</p>
                 </div>
                 <div class="comparison-card comparison-card-green">
@@ -1424,7 +1495,7 @@
                 </div>
                 <div class="comparison-card comparison-card-red">
                     <h4>🎯 Осознанный</h4>
-                    <p>Процесс целенаправленной разработки принципов, идей, идеалов.</p>
+                    <p>Процесс целенаправленн��й разработки принципов, идей, идеало����.</p>
                 </div>
             </div>
 
@@ -1432,9 +1503,9 @@
             <ul>
                 <li><strong>Историчность</strong> — всегда связано с переживаемыми обществом стадиями развития;</li>
                 <li><strong>Целостность</strong> — целостные, образные представления о мире;</li>
-                <li><strong>Определяет личность</strong> — отражает облик человека и его отношение к миру, определяет общую направленность личности;</li>
-                <li><strong>Связь с убеждениями</strong> — тесно взаимосвязано с убеждениями;</li>
-                <li><strong>Участие сознания</strong> — активное участие сознания в формировании мировоззрения.</li>
+                <li><strong>Определяет личность</strong> — отражает облик че��о��ека и его отнош��ние к миру, определяет общую направленность личности;</li>
+                <li><strong>Связь с уб��ждениями</strong> — тесно взаимосвязано с убеждениями;</li>
+                <li><strong>Участие сознания</strong> — активное участие сознания в формиро������ании мировоззрения.</li>
             </ul>
 
             <h3>6. Формы мировоззрения</h3>
@@ -1445,7 +1516,7 @@
                 </div>
                 <div class="classification-card">
                     <h5>🖼️ Мировосприятие</h5>
-                    <p>Образ мира в наглядных представлениях, содержит рассуждения и абстрактные понятия.</p>
+                    <p>Образ мира в на��лядных представлениях, содержит рассуждения и абстрактные понятия.</p>
                 </div>
                 <div class="classification-card">
                     <h5>🧠 Миропонимание</h5>
@@ -1742,13 +1813,13 @@
 
         // Создаем массив всех тем (75 тем)
         const allTopics = [
-            { id: "1.1", title: "Человек: биосоциальная природа, Личность, Потребности", theoryHTML: theoryHTML_1_1, tasks: tasksData_1_1 },
+            { id: "1.1", title: "Человек: Биосоциальная природа, Личность, Потребности", theoryHTML: theoryHTML_1_1, tasks: tasksData_1_1 },
             { id: "1.2", title: "Мировоззрение, его виды и формы", theoryHTML: theoryHTML_1_2, tasks: tasksData_1_2 },
             // Добавляем остальные темы (заглушки для примера)
-            { id: "2.1", title: "Духовная жизнь общества", theoryHTML: "<p>Теория темы 2.1</p>", tasks: { tests: [], inputs: [] } },
-            { id: "2.2", title: "Наука как особая сфера духовной культуры", theoryHTML: "<p>Теория темы 2.2</p>", tasks: { tests: [], inputs: [] } },
-            { id: "3.1", title: "Религия в жизни общества", theoryHTML: "<p>Теория темы 3.1</p>", tasks: { tests: [], inputs: [] } },
-            { id: "3.2", title: "Искусство и его формы", theoryHTML: "<p>Теория темы 3.2</p>", tasks: { tests: [], inputs: [] } },
+            { id: "2.1", title: "Деятельность и её структура", theoryHTML: "<p>Теория темы 2.1</p>", tasks: { tests: [], inputs: [] } },
+            { id: "2.2", title: "Познавательная деятельность", theoryHTML: "<p>Теория темы 2.2</p>", tasks: { tests: [], inputs: [] } },
+            { id: "3.1", title: "Истина и её критерии, Общество как система", theoryHTML: "<p>Теория темы 3.1</p>", tasks: { tests: [], inputs: [] } },
+            { id: "3.2", title: "Социальные институты", theoryHTML: "<p>Теория темы 3.2</p>", tasks: { tests: [], inputs: [] } },
             { id: "4.1", title: "Мораль и нравственность", theoryHTML: "<p>Теория темы 4.1</p>", tasks: { tests: [], inputs: [] } },
             { id: "4.2", title: "Образование в современном мире", theoryHTML: "<p>Теория темы 4.2</p>", tasks: { tests: [], inputs: [] } },
             { id: "5.1", title: "Экономика и экономическая наука", theoryHTML: "<p>Теория темы 5.1</p>", tasks: { tests: [], inputs: [] } },
@@ -1850,7 +1921,7 @@
                 weekCard.id = `week-card-${globalWeekNum}`;
 
                 weekCard.innerHTML = `
-                    <div class="week-header" onclick="toggleWeek(this)">
+                    <div class="week-header" onclick="goToWeek(${globalWeekNum})">
                         <div class="week-info">
                             <h3>📅 Неделя ${globalWeekNum}</h3>
                             <div class="week-desc">${weekTopics.map(t => t.title).join(', ')}</div>
@@ -1859,25 +1930,12 @@
                             <div class="progress-circle" id="circle-${globalWeekNum}" style="${styleString}">
                                 <span class="progress-text ${progressData.percent === 100 ? 'complete' : ''}">${Math.round(progressData.percent)}%</span>
                             </div>
-                            <div class="arrow">▼</div>
-                        </div>
-                    </div>
-                    <div class="week-content">
-                        <div class="content-inner">
-                            <div class="goal-box">
-                                🎯 <strong>Цель недели:</strong> Изучить темы "${weekTopics.map(t => t.title).join('" и "')}" и выполнить все задания.
-                            </div>
-                            <div id="topics-container-${globalWeekNum}"></div>
+                            <button class="study-btn">Приступить к изучению</button>
                         </div>
                     </div>
                 `;
 
                 container.appendChild(weekCard);
-
-                const topicsContainer = weekCard.querySelector(`#topics-container-${globalWeekNum}`);
-                weekTopics.forEach(topic => {
-                    topicsContainer.appendChild(createTopicElement(topic));
-                });
             }
         }
 
@@ -2027,6 +2085,11 @@
             }
         }
 
+        function goToWeek(weekNumber) {
+            // Redirect to the corresponding week page
+            window.location.href = `week${weekNumber}.html`;
+        }
+
         function updateWeekUI(globalWeekNum) {
             const circle = document.getElementById(`circle-${globalWeekNum}`);
             if (!circle) return;
@@ -2080,33 +2143,50 @@
             };
         }
 
-        window.toggleWeek = function(header) {
-            const card = header.parentElement;
-            const isActive = card.classList.contains('active');
-
-            // Close all other weeks
-            document.querySelectorAll('.week-card').forEach(w => {
-                if (w !== card) w.classList.remove('active');
-            });
-
-            // Toggle current week
-            card.classList.toggle('active');
-
-            // Прокручиваем к открытой неделе
-            if (card.classList.contains('active')) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        };
 
         window.changeMonth = function(dir) {
-            currentMonthIdx = currentMonthIdx + dir;
-            if (currentMonthIdx < 0) currentMonthIdx = 0;
-            if (currentMonthIdx > 8) currentMonthIdx = 8;
-            renderWeeks();
+            const monthDisplay = document.getElementById('monthDisplay');
 
-            // Smooth scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Add transition class for animation
+            monthDisplay.classList.add('transitioning');
+
+            setTimeout(() => {
+                currentMonthIdx = currentMonthIdx + dir;
+                if (currentMonthIdx < 0) currentMonthIdx = 0;
+                if (currentMonthIdx > 8) currentMonthIdx = 8;
+
+                // Update button states
+                updateNavButtons();
+
+                renderWeeks();
+
+                // Remove transition class after update
+                setTimeout(() => {
+                    monthDisplay.classList.remove('transitioning');
+                }, 10);
+
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 150); // Delay to allow animation to start
         };
+
+        function updateNavButtons() {
+            const prevBtn = document.querySelector('.nav-btn[onclick="changeMonth(-1)"]');
+            const nextBtn = document.querySelector('.nav-btn[onclick="changeMonth(1)"]');
+
+            if (prevBtn) {
+                prevBtn.disabled = currentMonthIdx <= 0;
+            }
+
+            if (nextBtn) {
+                nextBtn.disabled = currentMonthIdx >= 8;
+            }
+        }
+
+        // Initialize button states when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            updateNavButtons();
+        });
 
         renderWeeks();
     </script>
