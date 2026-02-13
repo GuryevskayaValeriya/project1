@@ -1150,7 +1150,7 @@
     }
     saveProgress(`${topicId}_test_${testIdx}`, true, topicId);
     } else {
-    msgBlock.textContent = `❌ Неверно. Правильный ответ: "${getCorrectAnswerText(topicId, testIdx, correctOptionIdx)}"`;
+    msgBlock.textContent = `❌ Неверно.`;
     msgBlock.className = "status-msg msg-error";
     card.className = "task-card incorrect";
     // Still mark the correct answer even when user gets it wrong
@@ -1249,7 +1249,7 @@
     }
     saveProgress(taskId, true, topicId);
     } else {
-    msgBlock.textContent = `❌ Неверно. Правильный ответ: ${correctAnswers[0]}`;
+    msgBlock.textContent = `❌ Неверно.`;
     msgBlock.className = "status-msg msg-error";
     card.className = "task-card incorrect";
     }

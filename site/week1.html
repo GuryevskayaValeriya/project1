@@ -815,7 +815,7 @@
         
         <header>
             <h1>🎓 Неделя 1 - План подготовки к ЕГЭ по обществознанию</h1>
-            <p>Темы: Человек: биосоциальная природа, Личность, Потребности, Мировоззрение</p>
+            <p>Темы: Человек, Личность, Потребности, Мировоззрение</p>
         </header>
 
         <div class="week-content">
@@ -1940,7 +1940,7 @@
 
                 saveProgress(`${topicId}_test_${testIdx}`, true, topicId);
             } else {
-                msgBlock.textContent = `❌ Неверно. Правильный ответ: "${getCorrectAnswerText(topicId, testIdx, correctOptionIdx)}"`;
+                msgBlock.textContent = `❌ Неверно.`;
                 msgBlock.className = "status-msg msg-error";
                 card.className = "task-card incorrect";
 
@@ -2034,7 +2034,7 @@
 
                 saveProgress(taskId, true, topicId);
             } else {
-                msgBlock.textContent = `❌ Неверно. Правильный ответ: ${correctAnswers[0]}`;
+                msgBlock.textContent = `❌ Неверно.`;
                 msgBlock.className = "status-msg msg-error";
                 card.className = "task-card incorrect";
             }

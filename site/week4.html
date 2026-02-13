@@ -12,7 +12,7 @@
         ← Назад к плану
     </button>
     <header>
-        <h1>🌍 Неделя 4 - План подготовки к ЕГЭ по обществознанию</h1>
+        <h1>🎓 Неделя 4 - План подготовки к ЕГЭ по обществознанию</h1>
         <p>Темы: Типы обществ, Общественный прогресс, Глобализация, Культура и её функции</p>
     </header>
     <div class="week-content">
@@ -1858,7 +1858,7 @@
         if (checkBtn) checkBtn.style.display = 'none';
         saveProgress(`${topicId}_test_${testIdx}`, true, topicId);
       } else {
-        msgBlock.textContent = `❌ Неверно. Правильный ответ: "${getCorrectAnswerText(topicId, testIdx, correctOptionIdx)}"`;
+        msgBlock.textContent = `❌ Неверно.`;
         msgBlock.className = "status-msg msg-error";
         card.className = "task-card incorrect";
         radios.forEach((r, idx) => {
@@ -1939,7 +1939,7 @@
         if (checkBtn) checkBtn.style.display = 'none';
         saveProgress(taskId, true, topicId);
       } else {
-        msgBlock.textContent = `❌ Неверно. Правильный ответ: ${correctAnswers[0]}`;
+        msgBlock.textContent = `❌ Неверно.`;
         msgBlock.className = "status-msg msg-error";
         card.className = "task-card incorrect";
       }
