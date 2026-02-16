@@ -910,11 +910,7 @@
         msgBlock.textContent = `❌ Неверно.`;
         msgBlock.className = "status-msg msg-error";
         card.className = "task-card incorrect";
-        radios.forEach((r, idx) => {
-          if (idx === correctOptionIdx) {
-            r.parentElement.classList.add('correct-answer');
-          }
-        });
+
       }
     };
 
