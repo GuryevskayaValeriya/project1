@@ -56,7 +56,6 @@
             margin: 0 auto;
         }
 
-        /* Header styles */
         header {
             background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
             padding: 40px 30px;
@@ -96,7 +95,40 @@
             z-index: 1;
         }
 
-        /* Month navigation */
+        .global-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         .month-nav {
             display: flex;
             justify-content: space-between;
@@ -187,7 +219,6 @@
             transform: scale(0.95);
         }
 
-        /* Week cards */
         .weeks-container {
             display: flex;
             flex-direction: column;
@@ -208,7 +239,14 @@
             box-shadow: var(--shadow-lg);
         }
 
-        /* Week header */
+        .week-card.complete {
+            border-left: 6px solid var(--success);
+        }
+
+        .week-card.in-progress {
+            border-left: 6px solid var(--warning);
+        }
+
         .week-header {
             padding: 25px 30px;
             cursor: pointer;
@@ -216,29 +254,12 @@
             justify-content: space-between;
             align-items: center;
             background: var(--bg-card);
-            border-left: 6px solid var(--border);
             transition: all 0.3s ease;
             position: relative;
         }
 
         .week-header:hover {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
-        }
-
-        .week-header::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, rgba(102, 126, 234, 0.03) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .week-header:hover::before {
-            opacity: 1;
         }
 
         .week-info {
@@ -251,15 +272,52 @@
 
         .week-info h3 {
             font-size: 1.4rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             color: var(--secondary);
             font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .week-info h3 span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: normal;
         }
 
         .week-desc {
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-secondary);
-            line-height: 1.6;
+            line-height: 1.5;
+        }
+
+        .variant-list {
+            margin-top: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .variant-badge {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--bg-light);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+
+        .variant-badge.completed {
+            background: #c6f6d5;
+            color: #22543d;
+            border-color: var(--success);
+        }
+
+        .variant-badge.in-progress {
+            background: #fef3c7;
+            color: #92400e;
+            border-color: var(--warning);
         }
 
         .week-meta {
@@ -270,7 +328,6 @@
             flex-shrink: 0;
         }
 
-        /* Progress circle with animation */
         .progress-circle {
             width: 70px;
             height: 70px;
@@ -316,18 +373,11 @@
             height: 100%;
         }
 
-        .arrow {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            transition: all 0.4s ease;
-            font-weight: bold;
-        }
-
         .study-btn {
             background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.9rem;
@@ -345,595 +395,29 @@
             transform: translateY(1px);
         }
 
-
-        /* Week content - Hidden since we navigate to separate pages */
-        .week-content {
-            display: none;
+        .reset-container {
+            text-align: center;
+            margin: 30px 0 20px;
         }
 
-        /* Goal box */
-        .goal-box {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            color: #1565c0;
-            padding: 20px 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            border-left: 4px solid #2196f3;
-            box-shadow: 0 3px 10px rgba(33, 150, 243, 0.15);
-            position: relative;
-        }
-
-        .goal-box::before {
-            content: "🎯";
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            font-size: 1.5rem;
-            opacity: 0.3;
-        }
-
-        /* Topic blocks */
-        .topic-block {
-            margin-bottom: 35px;
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--border);
-            box-shadow: var(--shadow-sm);
-            transition: all 0.3s ease;
-        }
-
-        .topic-block:hover {
-            border-color: var(--primary);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
-        }
-
-        .topic-title {
-            font-size: 1.35rem;
-            color: var(--primary);
-            border-bottom: 3px solid var(--border);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .topic-title::before {
-            content: "📚";
-            font-size: 1.3rem;
-        }
-
-        /* ====== СТИЛИ ДЛЯ ТЕОРИИ ====== */
-
-        /* Theory section */
-        .theory-spoiler {
-            margin-bottom: 25px;
-        }
-
-        .theory-btn {
-            background: linear-gradient(135deg, var(--secondary) 0%, #5d3a8c 100%);
+        .reset-btn {
+            background: linear-gradient(135deg, #f56565 0%, #c53030 100%);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
+            padding: 12px 30px;
+            border-radius: 25px;
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(245, 101, 101, 0.3);
         }
 
-        .theory-btn:hover {
+        .reset-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(118, 75, 162, 0.4);
+            box-shadow: 0 6px 18px rgba(245, 101, 101, 0.4);
         }
 
-        .theory-btn:active {
-            transform: translateY(1px);
-        }
-
-        .theory-content {
-            display: none;
-            margin-top: 20px;
-            line-height: 1.8;
-            background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
-            border-radius: 12px;
-            box-shadow: var(--shadow-sm);
-            max-height: none; /* УБИРАЕМ ОГРАНИЧЕНИЕ */
-            overflow: visible; /* Разрешаем полный показ контента */
-            padding: 25px;
-        }
-
-        .theory-content h3 {
-            color: var(--secondary);
-            margin: 25px 0 18px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid var(--border);
-            font-size: 1.5rem;
-        }
-
-        .theory-content h4 {
-            color: var(--primary);
-            margin: 20px 0 12px;
-            font-size: 1.25rem;
-        }
-
-        .theory-content p {
-            margin-bottom: 15px;
-            font-size: 1.05em;
-        }
-
-        .theory-content ul, .theory-content ol {
-            margin-left: 30px;
-            margin-bottom: 18px;
-        }
-
-        .theory-content li {
-            margin-bottom: 10px;
-            line-height: 1.7;
-        }
-
-        .theory-content i {
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
-        /* Concept highlights */
-        .concept-highlight {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            padding: 22px;
-            border-radius: 12px;
-            border-left: 5px solid #2196f3;
-            margin: 28px 0;
-            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
-            position: relative;
-        }
-
-        .concept-highlight::before {
-            content: "💡";
-            position: absolute;
-            left: -15px;
-            top: -15px;
-            background: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-            font-size: 1.1em;
-        }
-
-        .concept-highlight-purple {
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-            border-left-color: #9c27b0;
-        }
-
-        .concept-highlight-purple::before { content: "⭐"; }
-
-        .concept-highlight-orange {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border-left-color: #ff9800;
-        }
-
-        .concept-highlight-orange::before { content: "🦁"; }
-
-        .concept-highlight-green {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-left-color: #4caf50;
-        }
-
-        .concept-highlight-green::before { content: "🧠"; }
-
-        .concept-highlight-yellow {
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            border-left-color: #ffc107;
-            border: 2px solid #ffecb3;
-        }
-
-        .concept-highlight-yellow::before { content: "📜"; }
-
-        .concept-highlight-pink {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            border-left-color: #f44336;
-        }
-
-        .concept-highlight-pink::before { content: "🍔"; }
-
-        .concept-highlight-blue-light {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-left-color: #2196f3;
-        }
-
-        .concept-highlight-blue-light::before { content: "🗣️"; }
-
-        .concept-highlight-violet {
-            background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
-            border-left-color: #673ab7;
-        }
-
-        .concept-highlight-violet::before { content: "🎨"; }
-
-        .concept-highlight-teal {
-            background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
-            border-left-color: #00897b;
-        }
-
-        .concept-highlight-teal::before { content: "🌍"; }
-
-        /* Comparison grid */
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 22px;
-            margin: 28px 0;
-        }
-
-        .comparison-card {
-            padding: 22px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-        }
-
-        .comparison-card-orange {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border-left: 4px solid #ff9800;
-        }
-
-        .comparison-card-green {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            border-left: 4px solid #4caf50;
-        }
-
-        .comparison-card-blue {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border-left: 4px solid #2196f3;
-        }
-
-        .comparison-card-red {
-            background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
-            border-left: 4px solid #f44336;
-        }
-
-        /* Levels box */
-        .levels-box {
-            border: 2px solid var(--border);
-            padding: 25px;
-            border-radius: 12px;
-            margin: 30px 0;
-            background: #fafafa;
-            position: relative;
-        }
-
-        .levels-box::before {
-            content: "📈";
-            position: absolute;
-            left: -15px;
-            top: -15px;
-            background: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-            font-size: 1.2em;
-        }
-
-        /* Needs container */
-        .needs-container {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin: 30px 0;
-        }
-
-        .need-item {
-            padding: 14px 18px;
-            border-radius: 10px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.05em;
-        }
-
-        /* Maslow pyramid */
-        .maslow-container {
-            text-align: center;
-            margin: 40px 0;
-            padding: 20px;
-            background: #f8fafc;
-            border-radius: 15px;
-            border: 2px dashed var(--border);
-        }
-
-        .maslow-container img {
-            max-width: 100%;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.18);
-            transition: transform 0.4s ease;
-        }
-
-        .maslow-container img:hover {
-            transform: scale(1.03);
-        }
-
-        .maslow-container p {
-            font-size: 0.9em;
-            color: #4a5568;
-            margin-top: 12px;
-            font-style: italic;
-        }
-
-        .maslow-source {
-            font-size: 0.85em;
-            color: #718096;
-            margin-top: 8px;
-            display: block;
-        }
-
-        /* Practice section */
-        .practice-section {
-            margin-top: 45px;
-            background: #f8fafc;
-            padding: 30px;
-            border-radius: 15px;
-            border-left: 5px solid var(--primary);
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
-        }
-
-        .practice-section h3 {
-            color: var(--primary);
-            margin-bottom: 22px;
-            font-size: 1.6em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .practice-section h3::before {
-            content: "📖";
-            font-size: 1.4em;
-        }
-
-        .practice-item {
-            background: white;
-            padding: 24px;
-            border-radius: 10px;
-            margin-bottom: 24px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.09);
-            border-left: 4px solid #4299e1;
-            transition: transform 0.3s;
-        }
-
-        .practice-item:hover {
-            transform: translateX(5px);
-        }
-
-        .practice-item p {
-            margin-bottom: 12px;
-        }
-
-        .practice-answer {
-            color: #38a169;
-            font-weight: bold;
-            font-size: 1.15em;
-            margin-top: 14px;
-            padding: 12px 16px;
-            background: #c6f6d5;
-            border-radius: 8px;
-            display: inline-block;
-            box-shadow: 0 2px 6px rgba(56, 161, 105, 0.2);
-        }
-
-        /* Classification grid */
-        .classification-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .classification-card {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .classification-card h5 {
-            color: #4a5568;
-            margin-bottom: 12px;
-            font-size: 1.15em;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .source-note {
-            font-size: 0.88em;
-            color: #718096;
-            font-style: italic;
-            margin-top: 10px;
-            padding-left: 20px;
-            border-left: 3px solid var(--border);
-            background: #f8fafc;
-            padding: 8px 15px;
-            border-radius: 6px;
-            display: inline-block;
-            margin: 10px 0;
-        }
-
-        .highlight-key {
-            background: linear-gradient(120deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-            padding: 3px 8px;
-            border-radius: 5px;
-            font-weight: 600;
-            color: #4a5568;
-        }
-
-        .emoji {
-            font-size: 1.3em;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-
-        /* ====== СТИЛИ ДЛЯ ЗАДАНИЙ ====== */
-
-        /* Task cards */
-        .task-card {
-            margin-bottom: 20px;
-            padding: 25px;
-            background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
-            border-radius: 12px;
-            border: 2px solid var(--border);
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .task-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .task-card.correct {
-            border-color: var(--success);
-            background: linear-gradient(135deg, #f0fdf4 0%, #c6f6d5 100%);
-            transform: translateX(10px);
-        }
-
-        .task-card.incorrect {
-            border-color: var(--error);
-            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
-        }
-
-        .task-q {
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .task-q::before {
-            content: "❓";
-            font-size: 1.3rem;
-        }
-
-        .options-list {
-            margin-left: 10px;
-        }
-
-        .options-list label {
-            display: block;
-            margin-bottom: 12px;
-            padding: 12px 15px;
-            background: var(--bg-card);
-            border-radius: 8px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 1.02rem;
-        }
-
-        .options-list label:hover {
-            background: #f0f4f8;
-            border-color: var(--border);
-        }
-
-        .options-list input[type="radio"] {
-            margin-right: 10px;
-            cursor: pointer;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-            flex-wrap: wrap;
-        }
-
-        .input-answer {
-            flex: 1;
-            min-width: 250px;
-            padding: 12px 15px;
-            border: 2px solid var(--border);
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-        .input-answer:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
-        }
-
-        .check-btn {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-        }
-
-        .check-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
-        }
-
-        .check-btn:active {
-            transform: translateY(1px);
-        }
-
-        .status-msg {
-            font-size: 1rem;
-            margin-top: 12px;
-            font-weight: 700;
-            padding: 10px 15px;
-            border-radius: 8px;
-        }
-
-        .msg-success {
-            color: var(--success);
-            background: rgba(72, 187, 120, 0.1);
-        }
-
-        .msg-error {
-            color: var(--error);
-            background: rgba(245, 101, 101, 0.1);
-        }
-
-        .img-place {
-            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
-            color: var(--text-secondary);
-            padding: 30px;
-            text-align: center;
-            border-radius: 12px;
-            border: 3px dashed var(--border);
-            margin: 15px 0;
-            font-size: 1.1rem;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
             header {
                 padding: 30px 20px;
@@ -941,6 +425,10 @@
 
             header h1 {
                 font-size: 1.8rem;
+            }
+
+            .global-stats {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .month-nav {
@@ -975,27 +463,6 @@
                 width: 60px;
                 height: 60px;
             }
-
-            .content-inner {
-                padding: 25px 0;
-            }
-
-            .topic-block {
-                padding: 20px;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-            .input-answer {
-                min-width: 100%;
-            }
-
-            .comparison-grid,
-            .classification-grid {
-                grid-template-columns: 1fr;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1003,17 +470,12 @@
                 padding: 10px;
             }
 
-            .container {
-                max-width: 100%;
-            }
-
-            header {
-                padding: 25px 15px;
-                border-radius: 15px;
-            }
-
             header h1 {
                 font-size: 1.6rem;
+            }
+
+            .global-stats {
+                grid-template-columns: 1fr;
             }
 
             .nav-btn {
@@ -1025,49 +487,8 @@
             .month-title {
                 font-size: 1.3rem;
             }
-
-            .week-info h3 {
-                font-size: 1.2rem;
-            }
-
-            .progress-circle {
-                width: 50px;
-                height: 50px;
-            }
-
-            .progress-text {
-                font-size: 0.9rem;
-            }
-
-            .arrow {
-                font-size: 1.3rem;
-            }
-
-            .content-inner {
-                padding: 20px 0;
-            }
         }
 
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #5568d3 0%, #653a91 100%);
-        }
-
-        /* Animation for progress text */
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -1083,8 +504,27 @@
 <div class="container">
     <header>
         <h1>🎓 План подготовки к ЕГЭ по обществознанию</h1>
-        <p>Системный курс: теория + тесты + практика | 9 месяцев интенсивной подготовки</p>
+        <p>Системный курс: теория + тесты + практика + тренировочные варианты | 9 месяцев интенсивной подготовки</p>
     </header>
+
+    <div class="global-stats" id="globalStats">
+        <div class="stat-card">
+            <div class="stat-value" id="totalTopics">0</div>
+            <div class="stat-label">Всего тем</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="completedTopics">0</div>
+            <div class="stat-label">Тем изучено</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="totalTasks">0</div>
+            <div class="stat-label">Всего заданий</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-value" id="completedTasks">0</div>
+            <div class="stat-label">Заданий решено</div>
+        </div>
+    </div>
 
     <div class="month-nav">
         <button class="nav-btn" onclick="changeMonth(-1)"><span>‹</span></button>
@@ -1092,170 +532,108 @@
         <button class="nav-btn" onclick="changeMonth(1)"><span>›</span></button>
     </div>
 
-    <div class="weeks-container" id="weeksList">
-        <!-- Сюда будут генерироваться недели -->
+    <div class="weeks-container" id="weeksList"></div>
+
+    <div class="reset-container">
+        <button class="reset-btn" onclick="resetAllProgress()">🔄 Сбросить весь прогресс</button>
     </div>
 </div>
 
 <script>
     const months = ["Сентябрь", "Октябрь", "Ноябрь", "Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май"];
-    let currentMonthIdx = 0;
+    let currentMonthIdx = parseInt(localStorage.getItem('current_month_idx') || '0');
 
     let userProgress = JSON.parse(localStorage.getItem('ege_progress_v2') || '{}');
+    let variantProgress = JSON.parse(localStorage.getItem('ege_variants_progress') || '{}');
 
-    // Массив всех тем с ID, названиями и номером недели
+    console.log('Загруженный userProgress:', userProgress);
+    console.log('Загруженный variantProgress:', variantProgress);
+
     const allTopics = [
-        // Неделя 1
-        { id: "1.1", title: "Человек, Личность, Потребности", week: 1 },
-        { id: "1.2", title: "Мировоззрение", week: 1 },
+        { id: "1.1", title: "Человек, Личность, Потребности", week: 1, tasks: 8 },
+        { id: "1.2", title: "Мировоззрение", week: 1, tasks: 8 },
+        { id: "1.3", title: "Деятельность и её структура", week: 2, tasks: 8 },
+        { id: "1.4", title: "Познание", week: 2, tasks: 8 },
+        { id: "1.5", title: "Истина и её критерии", week: 3, tasks: 8 },
+        { id: "1.6", title: "Общество как система", week: 3, tasks: 8 },
+        { id: "1.7", title: "Общественные потребности", week: 3, tasks: 8 },
+        { id: "1.8", title: "Типы обществ", week: 4, tasks: 8 },
+        { id: "1.9", title: "Общественный прогресс", week: 4, tasks: 8 },
+        { id: "1.10", title: "Глобализация", week: 4, tasks: 8 },
+        { id: "1.11", title: "Культура", week: 4, tasks: 8 },
+        { id: "1.12", title: "Мораль", week: 5, tasks: 8 },
+        { id: "1.13", title: "Наука", week: 5, tasks: 8 },
+        { id: "1.14", title: "Образование", week: 5, tasks: 8 },
+        { id: "1.15", title: "Религия", week: 6, tasks: 8 },
+        { id: "1.16", title: "Искусство", week: 6, tasks: 8 },
+        { id: "2.1", title: "Роль экономики в жизни общества", week: 7, tasks: 8 },
+        { id: "2.2", title: "Экономические институты", week: 7, tasks: 8 },
+        { id: "2.3", title: "Экономические системы", week: 7, tasks: 8 },
+        { id: "2.4", title: "Экономическая деятельность", week: 8, tasks: 8 },
+        { id: "2.5", title: "Рынок и рыночный механизм", week: 8, tasks: 8 },
+        { id: "2.6", title: "Конкуренция", week: 9, tasks: 8 },
+        { id: "2.7", title: "Рынок труда и безработица", week: 9, tasks: 8 },
+        { id: "2.8", title: "Предприятие в экономике", week: 10, tasks: 8 },
+        { id: "2.9", title: "Институт предпринимательства", week: 10, tasks: 8 },
+        { id: "2.10", title: "Финансовый рынок", week: 11, tasks: 8 },
+        { id: "2.11", title: "Финансовые услуги", week: 11, tasks: 8 },
+        { id: "2.12", title: "Инфляция", week: 12, tasks: 8 },
+        { id: "2.13", title: "Государство в экономике", week: 12, tasks: 8 },
+        { id: "2.14", title: "Государственный бюджет", week: 12, tasks: 8 },
+        { id: "2.15", title: "Налоговая система", week: 13, tasks: 8 },
+        { id: "2.16", title: "Экономический рост", week: 13, tasks: 8 },
+        { id: "2.17", title: "Экономический цикл", week: 14, tasks: 8 },
+        { id: "2.18", title: "Мировая экономика", week: 14, tasks: 8 },
+        { id: "3.1", title: "Социальные общности и группы", week: 15, tasks: 8 },
+        { id: "3.2", title: "Этнические общности", week: 15, tasks: 8 },
+        { id: "3.3", title: "Молодежь как социальная группа", week: 16, tasks: 8 },
+        { id: "3.4", title: "Социальный статус и мобильность", week: 16, tasks: 8 },
+        { id: "3.5", title: "Семья и брак", week: 16, tasks: 8 },
+        { id: "3.6", title: "Социализация личности", week: 17, tasks: 8 },
+        { id: "3.7", title: "Социальные нормы и отклоняющееся поведение", week: 17, tasks: 8 },
+        { id: "3.8", title: "Социальный конфликт", week: 18, tasks: 8 },
+        { id: "3.9", title: "Социальная поддержка", week: 18, tasks: 8 },
+        { id: "3.10", title: "Профессиональная деятельность", week: 18, tasks: 8 },
+        { id: "4.1", title: "Политическая власть", week: 19, tasks: 8 },
+        { id: "4.2", title: "Политическая система общества", week: 19, tasks: 8 },
+        { id: "4.3", title: "Государство", week: 20, tasks: 8 },
+        { id: "4.4", title: "Форма государства и политический режим", week: 20, tasks: 8 },
+        { id: "4.5", title: "Федеративное устройство РФ", week: 21, tasks: 8 },
+        { id: "4.6", title: "Субъекты государственной власти в РФ", week: 21, tasks: 8 },
+        { id: "4.7", title: "Государственное управление", week: 22, tasks: 8 },
+        { id: "4.8", title: "Политическая культура", week: 22, tasks: 8 },
+        { id: "4.9", title: "Политическая идеология. Типы партийных систем", week: 23, tasks: 8 },
+        { id: "4.10", title: "Избирательная система", week: 23, tasks: 8 },
+        { id: "4.11", title: "Политическая элита и политическое лидерство", week: 24, tasks: 8 },
+        { id: "4.12", title: "Роль СМИ в политической жизни общества", week: 24, tasks: 8 },
+        { id: "5.1", title: "Право как социальный институт", week: 25, tasks: 8 },
+        { id: "5.2", title: "Источники права", week: 25, tasks: 8 },
+        { id: "5.3", title: "Система и отрасли права", week: 26, tasks: 8 },
+        { id: "5.4", title: "Понятие и признаки правоотношений", week: 26, tasks: 8 },
+        { id: "5.5", title: "Понятие юридической ответственности", week: 27, tasks: 8 },
+        { id: "5.6", title: "Конституция РФ", week: 27, tasks: 8 },
+        { id: "5.7", title: "Личные, социально-экономические права", week: 28, tasks: 8 },
+        { id: "5.8", title: "Гражданское право", week: 28, tasks: 8 },
+        { id: "5.9", title: "Семейное право", week: 29, tasks: 8 },
+        { id: "5.10", title: "Трудовое право", week: 29, tasks: 8 },
+        { id: "5.11", title: "Законодательство о налогах и сборах", week: 30, tasks: 8 },
+        { id: "5.12", title: "Образовательное право", week: 30, tasks: 8 },
+        { id: "5.13", title: "Административное право", week: 31, tasks: 8 },
+        { id: "5.14", title: "Экологическое законодательство", week: 31, tasks: 8 },
+        { id: "5.15", title: "Уголовное право", week: 32, tasks: 8 },
+        { id: "5.16", title: "Гражданское процессуальное право", week: 32, tasks: 8 },
+        { id: "5.17", title: "Административный процесс. Судебное производство", week: 33, tasks: 8 },
+        { id: "5.18", title: "Уголовное процессуальное право", week: 33, tasks: 8 },
+        { id: "5.19", title: "Конституционное и арбитражное судопроизводство", week: 34, tasks: 8 },
+        { id: "5.20", title: "Правоохранительные органы РФ", week: 34, tasks: 8 },
 
-        // Неделя 2
-        { id: "1.3", title: "Деятельность и её структура", week: 2 },
-        { id: "1.4", title: "Познание", week: 2 },
+        // Неделя 35
+        { id: "week35_var1", title: "Вариант 1 - Тренировочный ЕГЭ", week: 35, tasks: 25, isVariant: true },
+        { id: "week35_var2", title: "Вариант 2 - Тренировочный ЕГЭ", week: 35, tasks: 25, isVariant: true },
 
-        // Неделя 3 (3 темы)
-        { id: "1.5", title: "Истина и её критерии", week: 3 },
-        { id: "1.6", title: "Общество как система", week: 3 },
-        { id: "1.7", title: "Общественные потребности", week: 3 },
-
-        // Неделя 4
-        { id: "1.8", title: "Типы обществ", week: 4 },
-        { id: "1.9", title: "Общественный прогресс", week: 4 },
-        { id: "1.10", title: "Глобализация", week: 4 },
-        { id: "1.11", title: "Культура", week: 4 },
-
-        // Неделя 5
-        { id: "1.12", title: "Мораль", week: 5 },
-        { id: "1.13", title: "Наука", week: 5 },
-        { id: "1.14", title: "Образование", week: 5 },
-
-        // Неделя 6
-        { id: "1.15", title: "Религия", week: 6 },
-        { id: "1.16", title: "Искусство", week: 6 },
-
-        // Неделя 7
-        { id: "2.1", title: "Роль экономики в жизни общества", week: 7 },
-        { id: "2.2", title: "Экономические институты", week: 7 },
-        { id: "2.3", title: "Экономические системы", week: 7 },
-
-        // Неделя 8
-        { id: "2.4", title: "Экономическая деятельность", week: 8 },
-        { id: "2.5", title: "Рынок и рыночный механизм", week: 8 },
-
-        // Неделя 9
-        { id: "2.6", title: "Конкуренция", week: 9 },
-        { id: "2.7", title: "Рынок труда и безработица", week: 9 },
-
-        // Неделя 10
-        { id: "2.8", title: "Предприятие в экономике", week: 10 },
-        { id: "2.9", title: "Институт предпринимательства", week: 10 },
-
-        // Неделя 11
-        { id: "2.10", title: "Финансовый рынок", week: 11 },
-        { id: "2.11", title: "Финансовые услуги", week: 11 },
-
-        // Неделя 12
-        { id: "2.12", title: "Инфляция", week: 12 },
-        { id: "2.13", title: "Государство в экономике", week: 12 },
-        { id: "2.14", title: "Государственный бюджет", week: 12 },
-
-        // Неделя 13
-        { id: "2.15", title: "Налоговая система", week: 13 },
-        { id: "2.16", title: "Экономический рост", week: 13 },
-
-        // Неделя 14
-        { id: "2.17", title: "Экономический цикл", week: 14 },
-        { id: "2.18", title: "Мировая экономика", week: 14 },
-
-        // Неделя 15
-        { id: "3.1", title: "Социальные общности и группы", week: 15 },
-        { id: "3.2", title: "Этнические общности", week: 15 },
-
-        // Неделя 16
-        { id: "3.3", title: "Молодежь как социальная группа", week: 16 },
-        { id: "3.4", title: "Социальный статус и мобильность", week: 16 },
-        { id: "3.5", title: "Семья и брак", week: 16 },
-
-        // Неделя 17
-        { id: "3.6", title: "Социализация личности", week: 17 },
-        { id: "3.7", title: "Социальные нормы и отклоняющееся поведение", week: 17 },
-
-        // Неделя 18
-        { id: "3.8", title: "Социальный конфликт", week: 18 },
-        { id: "3.9", title: "Социальная поддержка", week: 18 },
-        { id: "3.10", title: "Профессиональная деятельность", week: 18 },
-
-        // Неделя 19
-        { id: "4.1", title: "Политическая власть", week: 19 },
-        { id: "4.2", title: "Политическая система общества", week: 19 },
-
-        // Неделя 20
-        { id: "4.3", title: "Государство", week: 20 },
-        { id: "4.4", title: "Форма государства и политический режим", week: 20 },
-
-        // Неделя 21
-        { id: "4.5", title: "Федеративное устройство РФ", week: 21 },
-        { id: "4.6", title: "Субъекты государственной власти в РФ", week: 21 },
-
-        // Неделя 22
-        { id: "4.7", title: "Государственное управление", week: 22 },
-        { id: "4.8", title: "Политическая культура", week: 22 },
-
-        // Неделя 23
-        { id: "4.9", title: "Политическая идеология. Типы партийных систем", week: 23 },
-        { id: "4.10", title: "Избирательная система", week: 23 },
-
-        // Неделя 24
-        { id: "4.11", title: "Политическая элита и политическое лидерство", week: 24 },
-        { id: "4.12", title: "Роль СМИ в политической жизни общества", week: 24 },
-
-        // Неделя 25
-        { id: "5.1", title: "Право как социальный институт", week: 25 },
-        { id: "5.2", title: "Источники права", week: 25 },
-
-        // Неделя 26
-        { id: "5.3", title: "Система и отрасли права", week: 26 },
-        { id: "5.4", title: "Понятие и признаки правоотношений", week: 26 },
-
-        // Неделя 27
-        { id: "5.5", title: "Понятие юридической ответственности", week: 27 },
-        { id: "5.6", title: "Конституция РФ", week: 27 },
-
-        // Неделя 28
-        { id: "5.7", title: "Личные, социально-экономические права", week: 28 },
-        { id: "5.8", title: "Гражданское право", week: 28 },
-
-        // Неделя 29
-        { id: "5.9", title: "Семейное право", week: 29 },
-        { id: "5.10", title: "Трудовое право", week: 29 },
-
-        // Неделя 30
-        { id: "5.11", title: "Законодательство о налогах и сборах", week: 30 },
-        { id: "5.12", title: "Образовательное право", week: 30 },
-
-        // Неделя 31
-        { id: "5.13", title: "Административное право", week: 31 },
-        { id: "5.14", title: "Экологическое законодательство", week: 31 },
-
-        // Неделя 32
-        { id: "5.15", title: "Уголовное право", week: 32 },
-        { id: "5.16", title: "Гражданское процессуальное право", week: 32 },
-
-        // Неделя 33
-        { id: "5.17", title: "Административный процесс. Судебное производство", week: 33 },
-        { id: "5.18", title: "Уголовное процессуальное право", week: 33 },
-
-        // Неделя 34
-        { id: "5.19", title: "Конституционное и арбитражное судопроизводство", week: 34 },
-        { id: "5.20", title: "Правоохранительные органы РФ", week: 34 },
-
-        // Неделя 35 - Тренировочные варианты
-        { id: "6.1", title: "Вариант 1 - Тренировочный ЕГЭ", week: 35 },
-        { id: "6.2", title: "Вариант 2 - Тренировочный ЕГЭ", week: 35 },
-
-        // Неделя 36 - Тренировочные варианты
-        { id: "6.3", title: "Тренировочный вариант №3 (ЕГЭ)", week: 36 },
-        { id: "6.4", title: "Тренировочный вариант №4 (ЕГЭ)", week: 36 }
+        // Неделя 36
+        { id: "week36_var3", title: "Вариант 3 - Тренировочный ЕГЭ", week: 36, tasks: 25, isVariant: true },
+        { id: "week36_var4", title: "Вариант 4 - Тренировочный ЕГЭ", week: 36, tasks: 25, isVariant: true }
     ];
 
     function renderWeeks() {
@@ -1263,42 +641,90 @@
         document.getElementById('monthDisplay').textContent = months[currentMonthIdx];
         container.innerHTML = '';
 
-        // Определяем диапазон недель для текущего месяца
         const startWeek = currentMonthIdx * 4 + 1;
-        const endWeek = Math.min(startWeek + 3, 38); // Не больше 38 недель
+        const endWeek = Math.min(startWeek + 3, 38);
 
-        // Для каждой недели в текущем месяце
         for (let weekNum = startWeek; weekNum <= endWeek; weekNum++) {
-            // Находим все темы для этой недели
             const weekTopics = allTopics.filter(topic => topic.week === weekNum);
-
             if (weekTopics.length === 0) continue;
 
             const progressData = calculateWeekProgress(weekTopics);
             const color = getProgressColor(progressData.percent);
             const styleString = `--p-color: ${color}; --p-percent: ${progressData.percent}%`;
 
+            let weekClass = 'week-card';
+            if (progressData.percent === 100) weekClass += ' complete';
+            else if (progressData.percent > 0) weekClass += ' in-progress';
+
             const weekCard = document.createElement('div');
-            weekCard.className = 'week-card';
+            weekCard.className = weekClass;
             weekCard.id = `week-card-${weekNum}`;
+
+            const regularTopics = weekTopics.filter(t => !t.isVariant);
+            const variantTopics = weekTopics.filter(t => t.isVariant);
+
+            let weekDescription = regularTopics.map(t => t.title).join(', ');
+            let variantsHtml = '';
+
+            if (variantTopics.length > 0) {
+                variantsHtml = '<div class="variant-list">';
+                variantTopics.forEach(variant => {
+                    const variantProgressPercent = getVariantProgress(variant.id);
+                    const variantClass = variantProgressPercent === 100 ? 'completed' : (variantProgressPercent > 0 ? 'in-progress' : '');
+                    variantsHtml += `<span class="variant-badge ${variantClass}" title="Прогресс: ${Math.round(variantProgressPercent)}%">${variant.title}</span>`;
+                });
+                variantsHtml += '</div>';
+            }
 
             weekCard.innerHTML = `
                 <div class="week-header" onclick="goToWeek(${weekNum})">
                     <div class="week-info">
-                        <h3>📅 Неделя ${weekNum}</h3>
-                        <div class="week-desc">${weekTopics.map(t => t.title).join(', ')}</div>
+                        <h3>📅 Неделя ${weekNum} <span>(${weekTopics.length} ${getWordEnding(weekTopics.length)})</span></h3>
+                        <div class="week-desc">${weekDescription}</div>
+                        ${variantsHtml}
                     </div>
                     <div class="week-meta">
                         <div class="progress-circle" id="circle-${weekNum}" style="${styleString}">
                             <span class="progress-text ${progressData.percent === 100 ? 'complete' : ''}">${Math.round(progressData.percent)}%</span>
                         </div>
-                        <button class="study-btn">Приступить к изучению</button>
+                        <button class="study-btn">${progressData.percent === 100 ? 'Повторить' : 'Продолжить'}</button>
                     </div>
                 </div>
             `;
 
             container.appendChild(weekCard);
         }
+
+        updateGlobalStats();
+    }
+
+    function getWordEnding(count) {
+        if (count % 10 === 1 && count % 100 !== 11) return 'тема';
+        if ([2,3,4].includes(count % 10) && ![12,13,14].includes(count % 100)) return 'темы';
+        return 'тем';
+    }
+
+    function getVariantProgress(variantId) {
+        const variantData = variantProgress[variantId];
+        if (!variantData) return 0;
+
+        let completedCount = 0;
+
+        if (variantData.completedTasks && Array.isArray(variantData.completedTasks)) {
+            completedCount = variantData.completedTasks.length;
+        } else if (variantData.tasks && typeof variantData.tasks === 'object') {
+            completedCount = Object.values(variantData.tasks).filter(v => v === true).length;
+        } else if (typeof variantData === 'number') {
+            completedCount = variantData;
+        } else if (variantData.completed && variantData.completed === true) {
+            const topic = allTopics.find(t => t.id === variantId);
+            completedCount = topic ? topic.tasks : 0;
+        }
+
+        const topic = allTopics.find(t => t.id === variantId);
+        if (!topic) return 0;
+
+        return (completedCount / topic.tasks) * 100;
     }
 
     function getProgressColor(percent) {
@@ -1312,29 +738,129 @@
         let completedTasks = 0;
 
         topics.forEach(topic => {
-            // Считаем тесты (обычно 5 на тему)
-            for (let i = 0; i < 5; i++) {
-                const testId = `${topic.id}_test_${i}`;
-                totalTasks++;
-                if (userProgress[testId]) completedTasks++;
-            }
+            if (topic.isVariant) {
+                totalTasks += topic.tasks;
+                const variantData = variantProgress[topic.id];
 
-            // Считаем input-задания (обычно 3 на тему)
-            for (let i = 0; i < 3; i++) {
-                const inputId = `${topic.id}_input_${i}`;
-                totalTasks++;
-                if (userProgress[inputId]) completedTasks++;
+                if (variantData) {
+                    if (variantData.completedTasks && Array.isArray(variantData.completedTasks)) {
+                        completedTasks += variantData.completedTasks.length;
+                    } else if (variantData.tasks && typeof variantData.tasks === 'object') {
+                        completedTasks += Object.values(variantData.tasks).filter(v => v === true).length;
+                    } else if (typeof variantData === 'number') {
+                        completedTasks += variantData;
+                    } else if (variantData.completed && variantData.completed === true) {
+                        completedTasks += topic.tasks;
+                    }
+                }
+            } else {
+                totalTasks += topic.tasks;
+
+                for (let i = 0; i < topic.tasks; i++) {
+                    const possibleIds = [
+                        `${topic.id}_test_${i}`,
+                        `${topic.id}_input_${i}`,
+                        `${topic.id}_${i}`,
+                        `task_${topic.id}_${i}`
+                    ];
+
+                    let taskCompleted = false;
+                    for (const id of possibleIds) {
+                        if (userProgress[id]) {
+                            taskCompleted = true;
+                            break;
+                        }
+                    }
+
+                    if (taskCompleted) {
+                        completedTasks++;
+                    }
+                }
             }
         });
+
+        console.log(`Неделя ${topics[0]?.week}: выполнено ${completedTasks} из ${totalTasks} заданий (${Math.round((completedTasks/totalTasks)*100)}%)`);
 
         return {
             percent: totalTasks === 0 ? 0 : (completedTasks / totalTasks) * 100
         };
     }
 
+    function updateGlobalStats() {
+        let totalTopics = allTopics.length;
+        let completedTopics = 0;
+        let totalTasks = 0;
+        let completedTasks = 0;
+
+        allTopics.forEach(topic => {
+            totalTasks += topic.tasks;
+
+            if (topic.isVariant) {
+                const variantData = variantProgress[topic.id];
+                let completedCount = 0;
+
+                if (variantData) {
+                    if (variantData.completedTasks && Array.isArray(variantData.completedTasks)) {
+                        completedCount = variantData.completedTasks.length;
+                    } else if (variantData.tasks && typeof variantData.tasks === 'object') {
+                        completedCount = Object.values(variantData.tasks).filter(v => v === true).length;
+                    } else if (typeof variantData === 'number') {
+                        completedCount = variantData;
+                    } else if (variantData.completed && variantData.completed === true) {
+                        completedCount = topic.tasks;
+                    }
+                }
+
+                completedTasks += completedCount;
+                if (completedCount === topic.tasks) completedTopics++;
+            } else {
+                let topicCompletedCount = 0;
+                let topicCompleted = true;
+
+                for (let i = 0; i < topic.tasks; i++) {
+                    const possibleIds = [
+                        `${topic.id}_test_${i}`,
+                        `${topic.id}_input_${i}`,
+                        `${topic.id}_${i}`,
+                        `task_${topic.id}_${i}`
+                    ];
+
+                    let taskCompleted = false;
+                    for (const id of possibleIds) {
+                        if (userProgress[id]) {
+                            taskCompleted = true;
+                            break;
+                        }
+                    }
+
+                    if (taskCompleted) {
+                        topicCompletedCount++;
+                    } else {
+                        topicCompleted = false;
+                    }
+                }
+
+                completedTasks += topicCompletedCount;
+                if (topicCompleted) completedTopics++;
+            }
+        });
+
+        document.getElementById('totalTopics').textContent = totalTopics;
+        document.getElementById('completedTopics').textContent = completedTopics;
+        document.getElementById('totalTasks').textContent = totalTasks;
+        document.getElementById('completedTasks').textContent = completedTasks;
+    }
+
     function goToWeek(weekNumber) {
-        // Переход на страницу соответствующей недели
-        window.location.href = `week${weekNumber}.html`;
+        localStorage.setItem('current_week', weekNumber);
+
+        if (weekNumber === 35) {
+            window.location.href = 'week35.html';
+        } else if (weekNumber === 36) {
+            window.location.href = 'week36.html';
+        } else {
+            window.location.href = `week${weekNumber}.html`;
+        }
     }
 
     function changeMonth(dir) {
@@ -1346,6 +872,8 @@
             currentMonthIdx = currentMonthIdx + dir;
             if (currentMonthIdx < 0) currentMonthIdx = 0;
             if (currentMonthIdx > 8) currentMonthIdx = 8;
+
+            localStorage.setItem('current_month_idx', currentMonthIdx);
 
             updateNavButtons();
             renderWeeks();
@@ -1371,8 +899,24 @@
         }
     }
 
-    // Инициализация при загрузке страницы
+    function resetAllProgress() {
+        if (confirm('Вы уверены, что хотите сбросить весь прогресс?')) {
+            localStorage.removeItem('ege_progress_v2');
+            localStorage.removeItem('ege_variants_progress');
+            localStorage.removeItem('current_month_idx');
+            userProgress = {};
+            variantProgress = {};
+            currentMonthIdx = 0;
+            renderWeeks();
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
+        const savedMonth = localStorage.getItem('current_month_idx');
+        if (savedMonth !== null) {
+            currentMonthIdx = parseInt(savedMonth);
+        }
+
         updateNavButtons();
         renderWeeks();
     });
