@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Неделя 2 - ЕГЭ Обществознание</title>
+    <style>
+        :root {
+        --primary: #667eea;
+        --secondary: #764ba2;
+        --accent: #f093fb;
+        --success: #48bb78;
+        --warning: #ecc94b;
+        --error: #f56565;
+        --info: #4299e1;
+        --bg-light: #f7fafc;
+        --bg-card: #ffffff;
+        --text-primary: #2d3748;
+        --text-secondary: #718096;
+        --border: #e2e8f0;
+        --shadow-sm: 0 2px 4px rgba(0 ,0,0,0.05);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+        --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
+        }
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        color: var(--text-primary);
+        min-height: 100vh;
+        padding: 20px;
+        }
+        .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        }
+        /* Header styles */
+        header {
+        background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: var(--shadow-lg);
+        text-align: center;
+        margin-bottom: 30px;
+        position: relative;
+        overflow: hidden;
+        }
+        header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+        z-index: 0;
+        }
+        header h1 {
+        color: var(--secondary);
+        margin-bottom: 15px;
+        font-size: 2.2rem;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        header p {
+        color: var(--text-secondary);
+        font-size: 1.1rem;
+        position: relative;
+        z-index: 1;
+        }
+        /* Back button */
+        .back-button {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        margin-bottom: 30px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        }
+        .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(102, 126, 234, 0.6);
+        }
+        /* Week content */
+        .week-content {
+        background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
+        border-radius: 18px;
+        padding: 30px;
+        box-shadow: var(--shadow-md);
+        margin-bottom: 30px;
+        }
+        /* Goal box */
+        .goal-box {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        color: #1565c0;
+        padding: 20px 25px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        border-left: 4px solid #2196f3;
+        box-shadow: 0 3px 10px rgba(33, 150, 243, 0.15);
+        position: relative;
+        }
+        .goal-box::before {
+        content: "🎯";
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 1.5rem;
+        opacity: 0.3;
+        }
+        /* Topic blocks */
+        .topic-block {
+        margin-bottom: 35px;
+        background: var(--bg-card);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        }
+        .topic-block:hover {
+        border-color: var(--primary);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+        }
+        .topic-title {
+        font-size: 1.35rem;
+        color: var(--primary);
+        border-bottom: 3px solid var(--border);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        }
+        .topic-title::before {
+        content: "📚";
+        font-size: 1.3rem;
+        }
+        /* Theory section */
+        .theory-spoiler {
+        margin-bottom: 25px;
+        }
+        .theory-btn {
+        background: linear-gradient(135deg, var(--secondary) 0%, #5d3a8c 100%);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(118, 75, 162, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+        }
+        .theory-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(118, 75, 162, 0.4);
+        }
+        .theory-btn:active {
+        transform: translateY(1px);
+        }
+        .theory-content {
+        display: none;
+        margin-top: 20px;
+        line-height: 1.8;
+        background: linear-gradient(135deg, #f8fafc 0%, #edf2f7 100%);
+        border-radius: 12px;
+        box-shadow: var(--shadow-sm);
+        max-height: none;
+        overflow: visible;
+        padding: 25px;
+        }
+        .theory-content h3 {
+        color: var(--secondary);
+        margin: 25px 0 18px;
+        padding-bottom: 10px;
+        border-bottom: 3px solid var(--border);
+        font-size: 1.5rem;
+        }
+        .theory-content h4 {
+        color: var(--primary);
+        margin: 20px 0 12px;
+        font-size: 1.25rem;
+        }
+        .theory-content p {
+        margin-bottom: 15px;
+        font-size: 1.05em;
+        }
+        .theory-content ul, .theory-content ol {
+        margin-left: 30px;
+        margin-bottom: 18px;
+        }
+        .theory-content li {
+        margin-bottom: 10px;
+        line-height: 1.7;
+        }
+        .theory-content i {
+        color: var(--text-secondary);
+        font-style: italic;
+        }
+        /* Concept highlights */
+        .concept-highlight {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        padding: 22px;
+        border-radius: 12px;
+        border-left: 5px solid #2196f3;
+        margin: 28px 0;
+        box-shadow: 0 4px 12px rgba(33, 150, 243, 0.15);
+        position: relative;
+        }
+        .concept-highlight::before {
+        content: "💡";
+        position: absolute;
+        left: -15px;
+        top: -15px;
+        background: white;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        font-size: 1.1em;
+        }
+        .concept-highlight-purple {
+        background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+        border-left-color: #9c27b0;
+        }
+        .concept-highlight-purple::before { content: "⭐"; }
+        .concept-highlight-orange {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        border-left-color: #ff9800;
+        }
+        .concept-highlight-orange::before { content: "🦁"; }
+        .concept-highlight-green {
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        border-left-color: #4caf50;
+        }
+        .concept-highlight-green::before { content: "🧠"; }
+        .concept-highlight-yellow {
+        background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+        border-left-color: #ffc107;
+        border: 2px solid #ffecb3;
+        }
+        .concept-highlight-yellow::before { content: "📜"; }
+        .concept-highlight-pink {
+        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        border-left-color: #f44336;
+        }
+        .concept-highlight-pink::before { content: "🍔"; }
+        .concept-highlight-blue-light {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border-left-color: #2196f3;
+        }
+        .concept-highlight-blue-light::before { content: "🗣️"; }
+        .concept-highlight-violet {
+        background: linear-gradient(135deg, #ede7f6 0%, #d1c4e9 100%);
+        border-left-color: #673ab7;
+        }
+        .concept-highlight-violet::before { content: "🎨"; }
+        .concept-highlight-teal {
+        background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+        border-left-color: #00897b;
+        }
+        .concept-highlight-teal::before { content: "🌍"; }
+        /* Comparison grid */
+        .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 22px;
+        margin: 28px 0;
+        }
+        .comparison-card {
+        padding: 22px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+        .comparison-card-orange {
+        background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+        border-left: 4px solid #ff9800;
+        }
+        .comparison-card-green {
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+        border-left: 4px solid #4caf50;
+        }
+        .comparison-card-blue {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border-left: 4px solid #2196f3;
+        }
+        .comparison-card-red {
+        background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%);
+        border-left: 4px solid #f44336;
+        }
+        /* Levels box */
+        .levels-box {
+        border: 2px solid var(--border);
+        padding: 25px;
+        border-radius: 12px;
+        margin: 30px 0;
+        background: #fafafa;
+        position: relative;
+        }
+        .levels-box::before {
+        content: "📈";
+        position: absolute;
+        left: -15px;
+        top: -15px;
+        background: white;
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+        font-size: 1.2em;
+        }
+        /* Needs container */
+        .needs-container {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        margin: 30px 0;
+        }
+        .need-item {
+        padding: 14px 18px;
+        border-radius: 10px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.05em;
+        }
+        /* Maslow pyramid */
+        .maslow-container {
+        text-align: center;
+        margin: 40px 0;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 15px;
+        border: 2px dashed var(--border);
+        }
+        .maslow-container img {
+        max-width: 100%;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+        transition: transform 0.4s ease;
+        }
+        .maslow-container img:hover {
+        transform: scale(1.03);
+        }
+        .maslow-container p {
+        font-size: 0.9em;
+        color: #4a5568;
+        margin-top: 12px;
+        font-style: italic;
+        }
+        .maslow-source {
+        font-size: 0.85em;
+        color: #718096;
+        margin-top: 8px;
+        display: block;
+        }
+        /* Practice section */
+        .practice-section {
+        margin-top: 45px;
+        background: #f8fafc;
+        padding: 30px;
+        border-radius: 15px;
+        border-left: 5px solid var(--primary);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.1);
+        }
+        .practice-section h3 {
+        color: var(--primary);
+        margin-bottom: 22px;
+        font-size: 1.6em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        }
+        .practice-section h3::before {
+        content: "📖";
+        font-size: 1.4em;
+        }
+        .practice-item {
+        background: white;
+        padding: 24px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.09);
+        border-left: 4px solid #4299e1;
+        transition: transform 0.3s;
+        }
+        .practice-item:hover {
+        transform: translateX(5px);
+        }
+        .practice-item p {
+        margin-bottom: 12px;
+        }
+        .practice-answer {
+        color: #38a169;
+        font-weight: bold;
+        font-size: 1.15em;
+        margin-top: 14px;
+        padding: 12px 16px;
+        background: #c6f6d5;
+        border-radius: 8px;
+        display: inline-block;
+        box-shadow: 0 2px 6px rgba(56, 161, 105, 0.2);
+        }
+        /* Classification grid */
+        .classification-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 25px 0;
+        }
+        .classification-card {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 20px;
+        border-left: 4px solid var(--primary);
+        }
+        .classification-card h5 {
+        color: #4a5568;
+        margin-bottom: 12px;
+        font-size: 1.15em;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        }
+        .source-note {
+        font-size: 0.88em;
+        color: #718096;
+        font-style: italic;
+        margin-top: 10px;
+        padding-left: 20px;
+        border-left: 3px solid var(--border);
+        background: #f8fafc;
+        padding: 8px 15px;
+        border-radius: 6px;
+        display: inline-block;
+        margin: 10px 0;
+        }
+        .highlight-key {
+        background: linear-gradient(120deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+        padding: 3px 8px;
+        border-radius: 5px;
+        font-weight: 600;
+        color: #4a5568;
+        }
+        .emoji {
+        font-size: 1.3em;
+        margin-right: 10px;
+        vertical-align: middle;
+        }
+        /* Task cards */
+        .task-card {
+        margin-bottom: 20px;
+        padding: 25px;
+        background: linear-gradient(135deg, var(--bg-card) 0%, #f8fafc 100%);
+        border-radius: 12px;
+        border: 2px solid var(--border);
+        transition: all 0.3s ease;
+        box-shadow: var(--shadow-sm);
+        }
+        .task-card:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .task-card.correct {
+        border-color: var(--success);
+        background: linear-gradient(135deg, #f0fdf4 0%, #c6f6d5 100%);
+        transform: translateX(10px);
+        }
+        .task-card.incorrect {
+        border-color: var(--error);
+        background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+        }
+        .task-q {
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--text-primary);
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        }
+        .task-q::before {
+        content: "❓";
+        font-size: 1.3rem;
+        }
+        .options-list {
+        margin-left: 10px;
+        }
+        .options-list label {
+        display: block;
+        margin-bottom: 12px;
+        padding: 12px 15px;
+        background: var(--bg-card);
+        border-radius: 8px;
+        border: 2px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-size: 1.02rem;
+        }
+        .options-list label:hover {
+        background: #f0f4f8;
+        border-color: var(--border);
+        }
+        .options-list label.correct-answer {
+        background: linear-gradient(135deg, #c6f6d5 0%, #68d391 100%);
+        border-color: var(--success);
+        font-weight: bold;
+        }
+        .options-list input[type="radio"] {
+        margin-right: 10px;
+        cursor: pointer;
+        }
+        .input-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+        }
+        .input-answer {
+        flex: 1;
+        min-width: 250px;
+        padding: 12px 15px;
+        border: 2px solid var(--border);
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: inherit;
+        }
+        .input-answer:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+        .check-btn {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .check-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(102, 126, 234, 0.4);
+        }
+        .check-btn:active {
+        transform: translateY(1px);
+        }
+        .status-msg {
+        font-size: 1rem;
+        margin-top: 12px;
+        font-weight: 700;
+        padding: 10px 15px;
+        border-radius: 8px;
+        }
+        .msg-success {
+        color: var(--success);
+        background: rgba(72, 187, 120, 0.1);
+        }
+        .msg-error {
+        color: var(--error);
+        background: rgba(245, 101, 101, 0.1);
+        }
+        .img-place {
+        background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+        color: var(--text-secondary);
+        padding: 30px;
+        text-align: center;
+        border-radius: 12px;
+        border: 3px dashed var(--border);
+        margin: 15px 0;
+        font-size: 1.1rem;
+        }
+        /* Responsive */
+        @media (max-width: 768px) {
+        header {
+        padding: 30px 20px;
+        }
+        header h1 {
+        font-size: 1.8rem;
+        }
+        .week-content {
+        padding: 20px;
+        }
+        .topic-block {
+        padding: 20px;
+        }
+        .input-group {
+        flex-direction: column;
+        }
+        .input-answer {
+        min-width: 100%;
+        }
+        .comparison-grid,
+        .classification-grid {
+        grid-template-columns: 1fr;
+        }
+        }
+        @media (max-width: 480px) {
+        body {
+        padding: 10px;
+        }
+        .container {
+        max-width: 100%;
+        }
+        header {
+        padding: 25px 15px;
+        border-radius: 15px;
+        }
+        header h1 {
+        font-size: 1.6rem;
+        }
+        .week-content {
+        padding: 15px;
+        }
+        .topic-info h3 {
+        font-size: 1.2rem;
+        }
+        .content-inner {
+        padding: 20px 0;
+        }
+        }
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+        width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #5568d3 0%, #653a91 100%);
+        }
+        /* Gradient animation */
+        @keyframes gradientShift {
+        0% {
+        background-position: 0% 50%;
+        }
+        50% {
+        background-position: 100% 50%;
+        }
+        100% {
+        background-position: 0% 50%;
+        }
+        }
+        /* Animation for progress text */
+        @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        }
+        .progress-text.complete {
+        color: var(--success);
+        animation: pulse 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <button class="back-button" onclick="goBack()">
+        ← Назад к плану
+    </button>
+    <header>
+        <h1>🎓 Неделя 2 - План подготовки к ЕГЭ по обществознанию</h1>
+        <p>Темы: Деятельность и её структура, Познание</p>
+    </header>
+    <div class="week-content">
+        <div class="goal-box">
+            🎯 <strong>Цель недели:</strong> Изучить темы "Деятельность и её структура", "Свобода и ответственность в
+            деятельности человека", а также "Познавательная деятельность. Познание мира" и выполнить все задания.
+        </div>
+
+        <!-- Topic 1.3 -->
+        <div class="topic-block">
+            <div class="topic-title">Тема 1.3: Деятельность и её структура</div>
+            <div class="theory-spoiler">
+                <button class="theory-btn" onclick="toggleTheory(this)">
+                    📖 Показать полную теорию
+                </button>
+                <div class="theory-content">
+                    <h3>1. Понятие деятельности</h3>
+                    <div class="concept-highlight concept-highlight-teal">
+                        <p><strong class="highlight-key">ДЕЯТЕЛЬНОСТЬ</strong> – это присущий только человеку способ
+                            взаимодействия с окружающим миром, в процессе которого он сознательно изменяет мир и самого
+                            себя, создавая то, чего не было в природе.</p>
+                    </div>
+                    <p>Социальная сущность и природные задатки человека раскрываются именно в деятельности.</p>
+                    <h3>2. Структура деятельности</h3>
+                    <ul style="list-style: none; padding-left: 0; margin-bottom: 25px;">
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">👤</span><strong class="highlight-key">СУБЪЕКТ</strong> — кто
+                            осуществляет деятельность? (человек, социальные группы, общество в целом)
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🎯</span><strong class="highlight-key">ОБЪЕКТ</strong> — на
+                            преобразование чего направлена деятельность? (предметы, явления, процессы, люди, группы,
+                            общество)
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">💭</span><strong class="highlight-key">МОТИВ</strong> — какой
+                            потребностью вызвана деятельность?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🏁</span><strong class="highlight-key">ЦЕЛЬ</strong> — каков желаемый
+                            результат деятельности?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🛠️</span><strong class="highlight-key">МЕТОДЫ, СРЕДСТВА</strong> — как,
+                            с помощью чего происходит деятельность?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">✅</span><strong class="highlight-key">РЕЗУЛЬТАТ</strong> — что
+                            получилось после всех действий?
+                        </li>
+                    </ul>
+                    <p><strong>Пример:</strong> Рассмотрим структуру деятельности на примере вашей подготовки к ЕГЭ по
+                        обществознанию. Субъект – обучающийся, объект – знания по предмету. Цель – успешная сдача
+                        экзамена, поступление в высшее учебное заведение. Мотивы могут быть разными.</p>
+                    <h3>3. Этапы деятельности</h3>
+                    <ol>
+                        <li><strong>Формулировка задачи (проблемы);</strong></li>
+                        <li><strong>Решение;</strong></li>
+                        <li><strong>Достижение нового знания.</strong></li>
+                    </ol>
+                    <h3>4. Признаки деятельности</h3>
+                    <p><strong>Ключевые признаки деятельности для ответа на задание второй части ЕГЭ по
+                        обществознанию:</strong></p>
+                    <ul>
+                        <li>осуществляется для удовлетворения потребностей;</li>
+                        <li>целенаправленность (целевой характер);</li>
+                        <li>осознанность (осознанный характер);</li>
+                        <li>свойственна только человеку.</li>
+                    </ul>
+                    <h3>5. Виды деятельности – классификация</h3>
+                    <div class="classification-grid">
+                        <div class="classification-card">
+                            <h5>📦 По объектам (результатам)</h5>
+                            <ul>
+                                <li><strong>Материальная</strong> — создание материальных ценностей;</li>
+                                <li><strong>Социально-преобразовательная</strong> — преобразование общества;</li>
+                                <li><strong>Духовная</strong> — создание идей, образов, духовных ценностей.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>👥 По субъектам</h5>
+                            <ul>
+                                <li><strong>Индивидуальная</strong> — одним человеком;</li>
+                                <li><strong>Групповая (коллективная)</strong> — совместно с другими.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🔄 По характеру</h5>
+                            <ul>
+                                <li><strong>Репродуктивная</strong> — по образцу;</li>
+                                <li><strong>Творческая</strong> — с элементами новаторства.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🌐 По сфере</h5>
+                            <ul>
+                                <li>Экономическая</li>
+                                <li>Социальная</li>
+                                <li>Политическая</li>
+                                <li>Духовная</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="maslow-container">
+                        <img src="https://sun9-8.userapi.com/impf/D2AMrUSuEpMx5Qcf89pjlJILvD3OSTeq19-5VA/uigo1IueFzU.jpg?size=1098x767&quality=96&sign=adfd8d6147f53f4dfde7485e708c25ac&type=album"
+                             alt="Таблица с классификацией деятельности">
+                        <p>Таблица с классификацией деятельности</p>
+
+                    </div>
+                    <h3>6. Основные черты деятельности</h3>
+                    <ul>
+                        <li><strong>Сознательный характер</strong> — человек сознательно выдвигает цели и предвидит
+                            результаты;
+                        </li>
+                        <li><strong>Продуктивный характер</strong> — направлена на получение конкретного результата;
+                        </li>
+                        <li><strong>Преобразующий характер</strong> — человек изменяет окружающий мир и образ жизни;
+                        </li>
+                        <li><strong>Общественный характер</strong> — человек вступает в отношения с другими людьми.</li>
+                    </ul>
+                    <h3>7. Поведение животного vs деятельность человека</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card comparison-card-orange">
+                            <h4>🦁 Поведение животного</h4>
+                            <ul>
+                                <li>приспособление к среде через мутации;</li>
+                                <li>целесообразность в поведении;</li>
+                                <li>запрограммированность инстинктами;</li>
+                                <li>воздействие на природу органами тела;</li>
+                                <li>потребительский характер — ничего нового не создают.</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card comparison-card-green">
+                            <h4>🧠 Деятельность человека</h4>
+                            <ul>
+                                <li>осознанное преобразование мира;</li>
+                                <li>целеполагание и планирование;</li>
+                                <li>создание новых объектов и идей;</li>
+                                <li>социальная направленность;</li>
+                                <li>ответственность за последствия.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>8. Мотивы деятельности</h3>
+                    <p><strong>Мотивы</strong> – побуждения деятельности, связанные с удовлетворением потребностей.</p>
+                    <ul>
+                        <li><strong>Потребность</strong> — нужда в чём-либо необходимом для жизни;</li>
+                        <li><strong>Социальные установки</strong> — готовность действовать определённым образом;</li>
+                        <li><strong>Убеждения</strong> — эмоционально-целостное отношение к действительности;</li>
+                        <li><strong>Интересы</strong> — реальная причина действий;</li>
+                        <li><strong>Влечения</strong> — неосознанная потребность.</li>
+                    </ul>
+                    <h3>9. Основные формы деятельности</h3>
+                    <div class="concept-highlight concept-highlight-purple">
+                        <h4>🎮 ИГРА</h4>
+                        <p>Свободная развивающая деятельность, осуществляемая ради удовольствия от процесса. Имеет
+                            правила и воображаемую обстановку. Детские игры — подготовка к жизни: освоение ролей,
+                            развитие навыков.</p>
+                    </div>
+                    <div class="concept-highlight concept-highlight-green">
+                        <h4>📚 УЧЕНИЕ / ПОЗНАНИЕ</h4>
+                        <p>Целенаправленный процесс получения знаний и умений, необходимых для жизни в обществе и
+                            профессиональной деятельности.</p>
+                    </div>
+                    <div class="concept-highlight concept-highlight-orange">
+                        <h4>💼 ТРУД</h4>
+                        <p>Процесс взаимодействия человека с окружающим миром, в ходе которого он создаёт предметы,
+                            необходимые для удовлетворения потребностей.</p>
+                    </div>
+                    <div class="concept-highlight concept-highlight-blue-light">
+                        <h4>🗣️ ОБЩЕНИЕ</h4>
+                        <p>Процесс установления контактов между людьми, обмен информацией, мыслями, чувствами. Люди
+                            оказывают влияние друг на друга.</p>
+                    </div>
+                    <hr>
+                    <!-- СВОБОДА И ОТВЕТСТВЕННОСТЬ -->
+                    <h3>10. Свобода и её особенности</h3>
+                    <div class="concept-highlight concept-highlight-teal">
+                        <p><strong class="highlight-key">СВОБОДА</strong> – умение познавать объективную необходимость
+                            и, опираясь на это познание, вырабатывать правильные цели, принимать и выбирать обоснованные
+                            решения и воплощать их в действительность.</p>
+                    </div>
+                    <p><strong>Статья 3 Всеобщей декларации прав человека:</strong> "Каждый человек имеет право на
+                        жизнь, на свободу, на личную неприкосновенность".</p>
+                    <p><strong>Особенности свободы:</strong></p>
+                    <ul>
+                        <li>Свобода состоит в умении принимать решения со знанием дела;</li>
+                        <li>Свобода доступна человеку только как общественному существу;</li>
+                        <li>Свобода возможна лишь при условии самоограничения, чтобы не ущемлять свободу других;</li>
+                        <li>Ядро свободы – выбор, основанный на эмоциональном и интеллектуальном напряжении сознания;
+                        </li>
+                        <li>Свобода носит относительный, а не абсолютный характер;</li>
+                        <li>Уровень свободы определяется системой норм общества.</li>
+                    </ul>
+                    <h3>11. Свобода в деятельности человека</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card comparison-card-orange">
+                            <h4>🌍 Относительная свобода (внешние условия)</h4>
+                            <p>Человек ограничен природными условиями и общественными нормами, отсутствует выбор
+                                объективных условий деятельности.</p>
+                        </div>
+                        <div class="comparison-card comparison-card-green">
+                            <h4>🧠 Абсолютная свобода (внутренняя жизнь)</h4>
+                            <p>Отсутствуют внешние препятствия для выбора цели и средств её достижения. Человек может
+                                сам выбирать цель и развивать свои способности.</p>
+                        </div>
+                    </div>
+                    <h3>12. Что ограничивает свободу</h3>
+                    <ul>
+                        <li>жизненные цели и ценностные ориентиры человека;</li>
+                        <li>общественное мнение и социальные нормы;</li>
+                        <li>природные факторы;</li>
+                        <li>самоограничение, чувство долга и ответственности;</li>
+                        <li>определённая структура общества;</li>
+                        <li>политические и экономические реалии.</li>
+                    </ul>
+                    <h3>13. Социальные условия реализации свободы</h3>
+                    <ul>
+                        <li>социальные нормы;</li>
+                        <li>место человека в обществе;</li>
+                        <li>социализация;</li>
+                        <li>уровень развития общества;</li>
+                        <li>формы общественной деятельности.</li>
+                    </ul>
+                    <h3>14. Свободное общество</h3>
+                    <div class="classification-grid">
+                        <div class="classification-card">
+                            <h5>🙏 Духовная сфера</h5>
+                            <p>Свобода вероисповедания, свобода творчества</p>
+                        </div>
+                        <div class="classification-card">
+                            <h5>💰 Экономическая сфера</h5>
+                            <p>Свобода предпринимательства, конкуренция</p>
+                        </div>
+                        <div class="classification-card">
+                            <h5>👥 Социальная сфера</h5>
+                            <p>Свободная социальная мобильность</p>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🗳️ Политическая сфера</h5>
+                            <p>Плюрализм, свобода партий, демократия</p>
+                        </div>
+                    </div>
+                    <h3>15. Признаки свободы человека</h3>
+                    <p><strong>Ключевые признаки свободы для ответа на задание второй части ЕГЭ по
+                        обществознанию:</strong></p>
+                    <ul>
+                        <li>подразумевает возможность выбора;</li>
+                        <li>ограничена объективными рамками законов природы и общества;</li>
+                        <li>подразумевает ответственность личности за результаты своего выбора.</li>
+                    </ul>
+                    <h3>16. Необходимость</h3>
+                    <div class="concept-highlight">
+                        <p><strong class="highlight-key">НЕОБХОДИМОСТЬ</strong> – связь между явлениями и процессами
+                            объектов действительности, обусловленная историческим развитием.</p>
+                    </div>
+                    <p>Необходимость повсюду и определяется законами, самостоятельными от сознания человека. Критерий
+                        свободы различен в каждую эпоху, это связано с типом личности. <strong>Свобода есть осознанная
+                            необходимость.</strong></p>
+                    <h3>17. Точки зрения на свободу человеческой воли</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card comparison-card-red">
+                            <h4>🔮 ФАТАЛИЗМ</h4>
+                            <p>Явления и процессы подчинены необходимости, исключается свобода выбора и случайности.
+                                (Судьба, обстоятельства...)</p>
+                        </div>
+                        <div class="comparison-card comparison-card-blue">
+                            <h4>💪 ВОЛЮНТАРИЗМ</h4>
+                            <p>Воля приходится основой действительности. Человек руководствуется лишь своими оценками и
+                                желаниями, пренебрегая объективными обстоятельствами.</p>
+                        </div>
+                    </div>
+                    <h3>18. Ответственность и её виды</h3>
+                    <div class="concept-highlight concept-highlight-pink">
+                        <p><strong class="highlight-key">ОТВЕТСТВЕННОСТЬ</strong> – способность действовать сознательно,
+                            понимать и предвидеть возможные последствия своей деятельности.</p>
+                    </div>
+                    <p>Ответственность выступает важнейшим внутренним регулятором человеческой деятельности (чувство
+                        ответственности, долга).</p>
+                    <p><strong>Виды ответственности:</strong></p>
+                    <ul>
+                        <li><strong>По сфере:</strong> историческая, нравственная, политическая, экономическая;</li>
+                        <li><strong>По субъекту:</strong> индивидуальная, коллективная, общественная;</li>
+                        <li><strong>По характеру:</strong> внешняя (санкции), внутренняя (перед собой), социальная.</li>
+                    </ul>
+                    <h3>19. Признаки ответственности</h3>
+                    <p><strong>Ключевые признаки ответственности для ответа на задание второй части ЕГЭ по
+                        обществознанию:</strong></p>
+                    <ul>
+                        <li>осознание и учёт возможных последствий своих действий;</li>
+                        <li>зависит от степени свободы человека;</li>
+                        <li>готовность следовать нормам и принимать санкции за их нарушение.</li>
+                    </ul>
+                    <p><strong>Важно:</strong> Чем больше свободы даёт социум индивиду, тем больше человеческая
+                        ответственность.</p>
+                    <hr>
+                    <div class="maslow-container">
+                        <img src="https://sun9-79.userapi.com/impg/8yjsiGhxkLrlrTPdRMSEPVAa6DaM082mcdDqww/sXRkHl-XJsg.jpg?size=807x454&quality=96&sign=679b31b444d3b14922617d1d21e3c416&c_uniq_tag=EI8XgOUUpv66tB6YkGblqUZQAuFP99w41lHRruG0r9w&type=album"
+                             alt="Шпаргалка по теме 'Свобода и отвественность'">
+                        <p>Шпаргалка по теме 'Свобода и отвественность'</p>
+
+                    </div>
+                    <!-- ПРАКТИКА ПО ТЕМЕ -->
+                    <div class="practice-section">
+                        <h3>Практика по теме в формате ЕГЭ</h3>
+                        <div class="practice-item">
+                            <p><strong>№1.</strong> Выберите верные суждения о свободе и ответственности и запишите
+                                цифры, под которыми они указаны.</p>
+                            <p><i>1) Свобода является специфически человеческим качеством, лежащим в основе формирования
+                                его индивидуальности, творческой инновационной деятельности. (Да)<br>
+                                2) По мере развития человеческой свободы индивидуальная ответственность уменьшается.
+                                (Нет)<br>
+                                3) Свобода и ответственность представляют собой две стороны сознательной человеческой
+                                деятельности. (Да)<br>
+                                4) Ответственность связана с осознанием объективных условий и субъективно поставленной
+                                цели. (Да)<br>
+                                5) Ответственность существует в природе и обществе в виде объективных законов. (Нет)</i>
+                            </p>
+                            <p class="practice-answer">Ответ: 134</p>
+                        </div>
+                        <div class="practice-item">
+                            <p><strong>№2.</strong> Выберите верные суждения о соотношении свободы, необходимости и
+                                ответственности в деятельности человека и запишите цифры, под которыми они указаны.</p>
+                            <p><i>1) Многообразие выбора ограничивает свободу в деятельности человека. (Нет)<br>
+                                2) Одним из проявлений необходимости в деятельности человека выступают объективные
+                                законы развития природы. (Да)<br>
+                                3) Ответственность человека повышается в условиях ограниченного выбора стратегий
+                                поведения в определенных ситуациях. (Нет)<br>
+                                4) Неограниченная свобода является безусловным благом для человека и общества. (Нет)<br>
+                                5) Готовность человека оценивать свои действия с точки зрения их последствий для
+                                окружающих служит одним из проявлений чувства ответственности. (Да)</i></p>
+                            <p class="practice-answer">Ответ: 25</p>
+                        </div>
+                        <div class="practice-item">
+                            <p><strong>№3.</strong> Выберите верные суждения о свободе и запишите цифры, под которыми
+                                они указаны.</p>
+                            <p><i>1) Свобода человека проявляется в отсутствии ответственности за совершенные поступки.
+                                (Нет)<br>
+                                2) Свобода человека лежит в основе поведения, направленного исключительно на получение
+                                удовольствия. (Нет)<br>
+                                3) Свобода человека включает в себя свободу передвижения и проживания, свободу мысли и
+                                совести, свободу слова и выражения, свободу на уединенность, на частную жизнь. (Да)<br>
+                                4) Свобода – это право самого себя ограничивать из-за уважения и любви к другим.
+                                (Да)<br>
+                                5) Свобода – это возможность по своей воле принимать любые решение и нести полную
+                                ответственность за последствия принятых решений. (Да)</i></p>
+                            <p class="practice-answer">Ответ: 345</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <!-- Задания по теме 1.3 -->
+                <div class="task-card" id="card-1.3_test_0">
+                    <div class="task-q">📝 Тест 1: Какой компонент структуры деятельности отражает причину, побудившую
+                        человека к действию?
+                    </div>
+                    <div class="options-list">
+                        <label>
+                            <input type="radio" name="1.3_test_0" value="0">
+                            Цель
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_0" value="1">
+                            Мотив
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_0" value="2">
+                            Результат
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_0" value="3">
+                            Средства
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkTest('1.3', 0, 1)">✅ Проверить ответ</button>
+                    <div id="msg-1.3_test_0" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_test_1">
+                    <div class="task-q">📝 Тест 2: Какая форма деятельности направлена на создание духовных ценностей?
+                    </div>
+                    <div class="options-list">
+                        <label>
+                            <input type="radio" name="1.3_test_1" value="0">
+                            Материальная
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_1" value="1">
+                            Социально-преобразовательная
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_1" value="2">
+                            Духовная
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_1" value="3">
+                            Практическая
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkTest('1.3', 1, 2)">✅ Проверить ответ</button>
+                    <div id="msg-1.3_test_1" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_test_2">
+                    <div class="task-q">📝 Тест 3: Что из перечисленного является признаком деятельности человека, но не
+                        присуще животным?
+                    </div>
+                    <div class="options-list">
+                        <label>
+                            <input type="radio" name="1.3_test_2" value="0">
+                            Целесообразность
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_2" value="1">
+                            Осознанность
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_2" value="2">
+                            Инстинктивность
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_2" value="3">
+                            Приспособление к среде
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkTest('1.3', 2, 1)">✅ Проверить ответ</button>
+                    <div id="msg-1.3_test_2" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_test_3">
+                    <div class="task-q">📝 Тест 4: Какая точка зрения утверждает, что человек полностью подчинён
+                        обстоятельствам и лишён свободы выбора?
+                    </div>
+                    <div class="options-list">
+                        <label>
+                            <input type="radio" name="1.3_test_3" value="0">
+                            Волюнтаризм
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_3" value="1">
+                            Гуманизм
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_3" value="2">
+                            Фатализм
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_3" value="3">
+                            Рационализм
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkTest('1.3', 3, 2)">✅ Проверить ответ</button>
+                    <div id="msg-1.3_test_3" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_test_4">
+                    <div class="task-q">📝 Тест 5: Что ограничивает свободу человека в обществе?</div>
+                    <div class="options-list">
+                        <label>
+                            <input type="radio" name="1.3_test_4" value="0">
+                            Только природные законы
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_4" value="1">
+                            Только личные желания
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_4" value="2">
+                            Социальные нормы и законы
+                        </label>
+                        <label>
+                            <input type="radio" name="1.3_test_4" value="3">
+                            Ничто не ограничивает
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkTest('1.3', 4, 2)">✅ Проверить ответ</button>
+                    <div id="msg-1.3_test_4" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_input_0">
+                    <div class="task-q">✍️ Задание 1: Назовите три компонента структуры деятельности (цифры без
+                        пробелов): 1) Субъект 2) Объект 3) Мотив 4) Цель 5) Средства 6) Результат
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-answer" id="val-1.3_input_0"
+                               placeholder="Введите ответ (цифры без пробелов)...">
+                        <button class="check-btn" onclick="checkInput('1.3', 0)">✅ Отправить</button>
+                    </div>
+                    <div id="msg-1.3_input_0" class="status-msg"></div>
+                </div>
+                <div class="task-card" id="card-1.3_input_1">
+                    <div class="task-q">✍️ Задание 2: Укажите три признака деятельности человека (цифры без пробелов):
+                        1) Осуществляется для удовлетворения потребностей 2) Целенаправленность 3) Осознанность 4)
+                        Свойственна только человеку 5) Инстинктивность
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input-answer" id="val-1.3_input_1"
+                               placeholder="Введите ответ (цифры без пробелов)...">
+                        <button class="check-btn" onclick="checkInput('1.3', 1)">✅ Отправить</button>
+                    </div>
+                    <div id="msg-1.3_input_1" class="status-msg"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Topic 1.4 -->
+        <div class="topic-block">
+            <div class="topic-title">Тема 1.4: Познавательная деятельность</div>
+            <div class="theory-spoiler">
+                <button class="theory-btn" onclick="toggleTheory(this)">
+                    📖 Показать полную теорию
+                </button>
+                <div class="theory-content">
+                    <h3>1. Основное понятие познания</h3>
+                    <div class="concept-highlight concept-highlight-teal">
+                        <p><strong class="highlight-key">ПОЗНАНИЕ</strong> – процесс постижения действительности,
+                            накопления и осмысления данных, полученных в опыте взаимодействия человека с окружающим
+                            миром.</p>
+                    </div>
+                    <ul style="list-style: none; padding-left: 0; margin-bottom: 25px;">
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">👤</span><strong class="highlight-key">Субъект познания</strong> —
+                            человек (тот, кто познаёт)
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🎯</span><strong class="highlight-key">Объект познания</strong> — предмет
+                            (то, что познаётся)
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🏁</span><strong class="highlight-key">Цель познания</strong> —
+                            достижение истины, правильного, достоверного знания об окружающей действительности
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">✅</span><strong class="highlight-key">Результат познания</strong> —
+                            новое знание
+                        </li>
+                    </ul>
+                    <div class="concept-highlight">
+                        <p><strong class="highlight-key">ЗНАНИЕ</strong> – результат познавательной деятельности,
+                            содержание сознания, полученное человеком в ходе активного отражения, идеального
+                            воспроизведения объективных закономерных связей и отношений реального мира.</p>
+                    </div>
+                    <p><strong>Знание вытекает из познания</strong> и является совокупностью сведений о какой-либо
+                        области познания.</p>
+                    <h3>2. Гносеология</h3>
+                    <div class="concept-highlight concept-highlight-purple">
+                        <p><strong class="highlight-key">ГНОСЕОЛОГИЯ</strong> – раздел философии, изучающий познание, а
+                            именно, возможности и границы познания, методы получения знаний.</p>
+                    </div>
+                    <p><strong>Подходы гносеологии:</strong></p>
+                    <ul>
+                        <li><strong>Гносеологический пессимизм</strong> — познание невозможно или существенно
+                            ограничено;
+                        </li>
+                        <li><strong>Гносеологический оптимизм</strong> — познание возможно.</li>
+                    </ul>
+                    <h3>3. Этапы познания</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card comparison-card-orange">
+                            <h4>👀 Чувственное познание</h4>
+                            <ul>
+                                <li>непосредственный контакт органов чувств с предметом;</li>
+                                <li>наглядность информации;</li>
+                                <li>воспроизведение внешних сторон и свойств объектов.</li>
+                            </ul>
+                            <p><strong>Формы чувственного познания:</strong></p>
+                            <ul>
+                                <li><strong>Ощущение</strong> — отражение отдельных свойств предметов;</li>
+                                <li><strong>Восприятие</strong> — целостный образ предмета;</li>
+                                <li><strong>Представление</strong> — обобщённый образ без непосредственного воздействия.
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card comparison-card-green">
+                            <h4>🧠 Рациональное познание</h4>
+                            <ul>
+                                <li>логические операции;</li>
+                                <li>опора на результаты чувственного познания;</li>
+                                <li>абстрактность и обобщённость;</li>
+                                <li>выявление существенных признаков, связей, закономерностей.</li>
+                            </ul>
+                            <p><strong>Формы рационального познания:</strong></p>
+                            <ul>
+                                <li><strong>Понятие</strong> — мысль, фиксирующая общие существенные свойства;</li>
+                                <li><strong>Суждение</strong> — утверждение или отрицание чего-либо;</li>
+                                <li><strong>Умозаключение</strong> — вывод нового суждения из имеющихся.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>4. Структура деятельности</h3>
+                    <p>Социальная сущность и природные задатки человека раскрываются в деятельности.</p>
+                    <div class="concept-highlight">
+                        <p><strong class="highlight-key">ДЕЯТЕЛЬНОСТЬ</strong> – это присущий только человеку способ
+                            взаимодействия с окружающим миром, в процессе которого он сознательно изменяет мир и самого
+                            себя, создавая то, чего не было в природе.</p>
+                    </div>
+                    <ul style="list-style: none; padding-left: 0; margin-bottom: 25px;">
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">👤</span><strong class="highlight-key">Субъект</strong> — кто
+                            осуществляет деятельность? (человек, группы, общество)
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🎯</span><strong class="highlight-key">Объект</strong> — на
+                            преобразование чего направлена деятельность?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">💭</span><strong class="highlight-key">Мотив</strong> — какой
+                            потребностью вызвана деятельность?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🏁</span><strong class="highlight-key">Цель</strong> — каков желаемый
+                            результат?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">🛠️</span><strong class="highlight-key">Методы, средства</strong> — как,
+                            с помощью чего происходит деятельность?
+                        </li>
+                        <li style="margin-bottom: 18px; font-size: 1.1em;">
+                            <span class="emoji">✅</span><strong class="highlight-key">Результат</strong> — что
+                            получилось после всех действий?
+                        </li>
+                    </ul>
+                    <p><strong>Пример:</strong> Подготовка к ЕГЭ по обществознанию. Субъект – обучающийся, объект –
+                        знания по предмету. Цель – успешная сдача экзамена.</p>
+                    <h3>5. Этапы деятельности</h3>
+                    <ol>
+                        <li><strong>Формулировка задачи (проблемы);</strong></li>
+                        <li><strong>Решение;</strong></li>
+                        <li><strong>Достижение нового знания.</strong></li>
+                    </ol>
+                    <h3>6. Признаки деятельности</h3>
+                    <p><strong>Ключевые признаки деятельности для ответа на задание второй части ЕГЭ по
+                        обществознанию:</strong></p>
+                    <ul>
+                        <li>осуществляется для удовлетворения потребностей;</li>
+                        <li>целенаправленность (целевой характер);</li>
+                        <li>осознанность (осознанный характер);</li>
+                        <li>свойственна только человеку.</li>
+                    </ul>
+                    <h3>7. Виды деятельности – классификация</h3>
+                    <div class="classification-grid">
+                        <div class="classification-card">
+                            <h5>📦 По объектам (результатам)</h5>
+                            <ul>
+                                <li><strong>Материальная</strong> — создание материальных ценностей;</li>
+                                <li><strong>Социально-преобразовательная</strong> — преобразование общества;</li>
+                                <li><strong>Духовная</strong> — создание идей, образов, духовных ценностей.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>👥 По субъектам</h5>
+                            <ul>
+                                <li><strong>Индивидуальная</strong> — одним человеком;</li>
+                                <li><strong>Групповая (коллективная)</strong> — совместно с другими.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🔄 По характеру</h5>
+                            <ul>
+                                <li><strong>Репродуктивная</strong> — по образцу;</li>
+                                <li><strong>Творческая</strong> — с элементами новаторства.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🌐 По сфере</h5>
+                            <ul>
+                                <li>Экономическая</li>
+                                <li>Социальная</li>
+                                <li>Полitическая</li>
+                                <li>Духовная</li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <h3>8. Роль практики в процессе познания</h3>
+                    <ol>
+                        <li><strong>Практика – источник и цель познания.</strong> Человек познаёт мир для использования
+                            результатов в практической деятельности.
+                        </li>
+                        <li><strong>Практика – основа познания.</strong> Даёт объекты познания, методы, оборудование.
+                        </li>
+                        <li><strong>Практика – критерий истины.</strong> Теоретическое положение остаётся гипотезой,
+                            пока не проверено практикой.
+                        </li>
+                    </ol>
+                    <h3>9. Источники знаний</h3>
+                    <ul>
+                        <li><strong>Эмпиризм</strong> — эмоциональный опыт, непосредственно дающий знания;</li>
+                        <li><strong>Рационализм</strong> — сведения, получаемые посредством мышления;</li>
+                        <li><strong>Интуиция</strong> — познание истины путём предчувствия, без логических
+                            доказательств.
+                        </li>
+                    </ul>
+                    <h3>10. Основные формы знания</h3>
+                    <ul>
+                        <li><strong>Научное</strong> — рациональное знание, подкреплённое теориями и законами;</li>
+                        <li><strong>Ненаучное</strong> — разрозненное, несистематизированное знание.</li>
+                    </ul>
+                    <h3>11. Классификация знаний</h3>
+                    <div class="classification-grid">
+                        <div class="classification-card">
+                            <h5>📚 По носителям</h5>
+                            <ul>
+                                <li>знания людей;</li>
+                                <li>в книгах;</li>
+                                <li>в Интернете;</li>
+                                <li>в музеях.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>📊 По формализации</h5>
+                            <ul>
+                                <li>формализованные;</li>
+                                <li>структурированные;</li>
+                                <li>неформализованные.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🔍 По способу получения</h5>
+                            <ul>
+                                <li>практические;</li>
+                                <li>бытовые;</li>
+                                <li>научные;</li>
+                                <li>религиозные.</li>
+                            </ul>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🎤 По презентации</h5>
+                            <ul>
+                                <li>устная и письменная речь;</li>
+                                <li>изображения;</li>
+                                <li>таблицы.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>12. Виды знаний</h3>
+                    <ul>
+                        <li><strong>Обыденное</strong> — базируется на повседневной реальности и опыте;</li>
+                        <li><strong>Религиозное</strong> — вера в сверхъестественное;</li>
+                        <li><strong>Художественное</strong> — формируется сферой искусства;</li>
+                        <li><strong>Философское</strong> — упор на рационально-теоретические формы;</li>
+                        <li><strong>Рациональное</strong> — базируется на рациональном мышлении;</li>
+                        <li><strong>Иррациональное</strong> — переживания, страсти, интуиция;</li>
+                        <li><strong>Личностное</strong> — особенности интеллектуальной деятельности субъекта.</li>
+                    </ul>
+                    <h3>13. Научное познание</h3>
+                    <div class="concept-highlight concept-highlight-green">
+                        <p><strong class="highlight-key">НАУЧНОЕ ПОЗНАНИЕ</strong> – особый вид познавательной
+                            деятельности, направленной на выработку объективных, системно организованных и теоретически
+                            обоснованных знаний о природе, человеке и обществе.</p>
+                    </div>
+                    <p><strong>Задача научного познания</strong> – раскрыть внутреннюю природу, сущность предметов и
+                        явлений, законы их функционирования и развития.</p>
+                    <h3>14. Уровни научного познания</h3>
+                    <div class="comparison-grid">
+                        <div class="comparison-card comparison-card-orange">
+                            <h4>🔬 Эмпирический уровень</h4>
+                            <p><strong>Формы знания:</strong> научный факт, эмпирическая закономерность.</p>
+                            <p><strong>Методы:</strong></p>
+                            <ul>
+                                <li>наблюдение;</li>
+                                <li>эксперимент;</li>
+                                <li>сравнение;</li>
+                                <li>описание;</li>
+                                <li>измерение;</li>
+                                <li>моделирование.</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card comparison-card-green">
+                            <h4>📚 Теоретический уровень</h4>
+                            <p><strong>Формы знания:</strong> проблема, закономерность, закон, гипотеза, концепция,
+                                теория.</p>
+                            <p><strong>Методы:</strong></p>
+                            <ul>
+                                <li>формализация;</li>
+                                <li>индукция;</li>
+                                <li>дедукция;</li>
+                                <li>идеализация.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>15. Признаки научного познания</h3>
+                    <ul>
+                        <li>объективность;</li>
+                        <li>проверяемость и воспроизводимость;</li>
+                        <li>системность;</li>
+                        <li>доказательность;</li>
+                        <li>рациональность;</li>
+                        <li>наличие специального «языка науки»;</li>
+                        <li>использование специальных способов и инструментов.</li>
+                    </ul>
+                    <div class="maslow-container">
+                        <img src="https://sun9-23.userapi.com/impf/c849132/v849132119/4ab5b/zHaaRlMXzzA.jpg?size=1083x767&quality=96&sign=0cd499581561a86c5d835d1a66ec297a&type=album"
+                             alt="Структура научного познания">
+                        <p>Структура научного познания</p>
+
+                    </div>
+                    <h3>16. Ненаучное познание</h3>
+                    <p><strong>Формы ненаучного познания:</strong></p>
+                    <ul>
+                        <li><strong>Мифология</strong> — миф содержит яркую образную информацию, воспринимаемую как
+                            истина;
+                        </li>
+                        <li><strong>Обыденно-практическое познание</strong> — здравый смысл, житейский опыт;</li>
+                        <li><strong>Религиозное познание</strong> — вера в сверхъестественное;</li>
+                        <li><strong>Паранаука</strong> — знание, не поддающееся объяснению с точки зрения науки;</li>
+                        <li><strong>Игровое познание;</strong></li>
+                        <li><strong>Художественно-образное познание</strong> (искусство).</li>
+                    </ul>
+                    <p><strong>Подразделяется на:</strong></p>
+                    <ul>
+                        <li>донаучное знание;</li>
+                        <li>паранаучное знание;</li>
+                        <li>вненаучное знание;</li>
+                        <li>антинаучное знание;</li>
+                        <li>псевдонаучное;</li>
+                        <li>лженаучное.</li>
+                    </ul>
+                    <h3>17. Социальное познание</h3>
+                    <div class="concept-highlight concept-highlight-blue-light">
+                        <p><strong class="highlight-key">СОЦИАЛЬНОЕ ПОЗНАНИЕ</strong> – процесс приобретения и развития
+                            знаний о человеке и обществе.</p>
+                    </div>
+                    <p><strong>Принципы:</strong></p>
+                    <ul>
+                        <li>анализ социальной действительности в развитии;</li>
+                        <li>изучение общественных явлений во взаимозависимости;</li>
+                        <li>выявление общих исторических закономерностей.</li>
+                    </ul>
+                    <p><strong>Особенности социального познания:</strong></p>
+                    <ul>
+                        <li>субъект и объект познания совпадают;</li>
+                        <li>знание связано с интересами субъектов;</li>
+                        <li>имеет ценностный характер;</li>
+                        <li>сложность объекта познания;</li>
+                        <li>ограниченная возможность применения эксперимента.</li>
+                    </ul>
+                    <h3>18. Мышление</h3>
+                    <div class="concept-highlight">
+                        <p><strong class="highlight-key">МЫШЛЕНИЕ</strong> – способность к познанию существенных свойств
+                            и связей объектов, выходящих за рамки чувственной информации и практического опыта.</p>
+                    </div>
+                    <p><strong>Признаки мышления:</strong></p>
+                    <ul>
+                        <li>опосредованный характер;</li>
+                        <li>обобщённо отражает действительность;</li>
+                        <li>тесно связано с языком;</li>
+                        <li>результаты закрепляются в форме понятий, суждений, умозаключений.</li>
+                    </ul>
+                    <h3>19. Операции (приёмы) мышления</h3>
+                    <ul>
+                        <li><strong>Анализ</strong> — разложение предмета на элементы;</li>
+                        <li><strong>Синтез</strong> — объединение элементов целого;</li>
+                        <li><strong>Сравнение</strong> — установление сходства или различия;</li>
+                        <li><strong>Обобщение</strong> — переход от конкретных объектов к свойствам их классов;</li>
+                        <li><strong>Абстрагирование</strong> — отвлечение от ряда качеств объекта;</li>
+                        <li><strong>Моделирование</strong> — исследование свойств объектов на моделях.</li>
+                    </ul>
+                    <h3>20. Основные формы мышления</h3>
+                    <ul>
+                        <li><strong>Понятие</strong> — мысль, фиксирующая существенные общие признаки;</li>
+                        <li><strong>Суждение</strong> — утверждение или отрицание наличия признаков;</li>
+                        <li><strong>Умозаключение</strong> — вывод нового суждения из имеющихся.</li>
+                    </ul>
+                    <h3>21. Методы мышления</h3>
+                    <ul>
+                        <li><strong>Дедукция</strong> — частное выводится из общего;</li>
+                        <li><strong>Индукция</strong> — общее выводится из частного.</li>
+                    </ul>
+                    <h3>22. Типы мышления</h3>
+                    <div class="classification-grid">
+                        <div class="classification-card">
+                            <h5>🖼️ Образное</h5>
+                            <p>Мыслительный процесс осуществляется образными представлениями. Свойственно первобытному
+                                человеку.</p>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🧠 Теоретическое</h5>
+                            <p>Использование абстрактных понятий и теоретических знаний. Свойственно современному
+                                человеку.</p>
+                        </div>
+                        <div class="classification-card">
+                            <h5>🔠 Знаковое</h5>
+                            <p>Знание существует в языковых знаках. Обусловлено интеграцией точных наук в жизнь
+                                человека.</p>
+                        </div>
+
+                    </div>
+                    <div class="maslow-container">
+                        <img src="https://sun9-63.userapi.com/impg/qQ-5S_Uhq4I0tRGRtBMavx6fm2_ZgciyUDhbYg/OEA1-PZqQ-0.jpg?size=1280x720&quality=96&sign=373856e2c5e6b95ff83c12543747cda0&type=album"
+                             alt="Шпаргалка по видам знаний">
+                        <p>Шпаргалка по видам знаний</p>
+
+                    </div>
+                    <hr>
+                    <!-- ПЛАН (ЗАДАНИЕ 24) -->
+                    <div class="concept-highlight concept-highlight-yellow">
+                        <h4>📜 План (Задание 24): "Познавательная деятельность"</h4>
+                        <ol>
+                            <li><strong>Познание как процесс получения знаний о мире.</strong></li>
+                            <li><strong>Этапы (ступени) познания:</strong>
+                                <ul style="list-style-type: circle; margin-left: 30px; margin-top: 10px;">
+                                    <li>чувственное (ощущение, восприятие, представление);</li>
+                                    <li>рациональное (понятие, суждение, умозаключение).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Основные пути (формы) познания мира:</strong>
+                                <ul style="list-style-type: circle; margin-left: 30px; margin-top: 10px;">
+                                    <li>мифологическое познание;</li>
+                                    <li>жизненный опыт;</li>
+                                    <li>научное познание;</li>
+                                    <li>философское познание;</li>
+                                    <li>искусство;</li>
+                                    <li>паранаука и др.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Научное познание мира и его особенности:</strong>
+                                <ul style="list-style-type: circle; margin-left: 30px; margin-top: 10px;">
+                                    <li>эмпирический и теоретический уровни;</li>
+                                    <li>стремление к объективности;</li>
+                                    <li>доказательность;</li>
+                                    <li>системность и др.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Особенности социального познания:</strong>
+                                <ul style="list-style-type: circle; margin-left: 30px; margin-top: 10px;">
+                                    <li>совпадение субъекта и объекта познания;</li>
+                                    <li>уникальность и неповторимость социальных явлений;</li>
+                                    <li>высокая доля субъективизма в изучении социальных явлений, связь с интересами
+                                        субъекта и др.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    <!-- ПРАКТИКА ПО ТЕМЕ -->
+                    <div class="practice-section">
+                        <h3>Практика по теме в формате ЕГЭ</h3>
+                        <div class="practice-item">
+                            <p><strong>№1.</strong> Учёные обобщили результаты многолетнего исследования и написали
+                                книгу. По каким основаниям содержание книги можно отнести к научному знанию?</p>
+                            <p><i>1) Для подтверждения истинности суждений предложены доказательства. (Да)<br>
+                                2) Книга сложна для самостоятельного изучения неспециалистами. (Нет)<br>
+                                3) Содержание книги изложено профессиональным языком. (Да)<br>
+                                4) Все гипотезы исследователей были обоснованы. (Да)<br>
+                                5) Книга была напечатана в крупном издательстве. (Нет)<br>
+                                6) Весь тираж книги был раскуплен в течение одного месяца. (Нет)</i></p>
+                            <p class="practice-answer">Ответ: 134</p>
+                        </div>
+                        <div class="practice-item">
+                            <p><strong>№2.</strong> Выберите верные суждения о чувственном познании и запишите цифры,
+                                под которыми они указаны.</p>
+                            <p><i>1) Чувственное познание присуще всем живым существам. (Нет)<br>
+                                2) Одной из форм чувственного познания является восприятие. (Да)<br>
+                                3) Чувственное познание дает полное и исчерпывающее знание о предмете. (Нет)<br>
+                                4) Чувственное познание в сравнении с рациональным глубже и точнее отражает предмет
+                                изучения. (Нет)<br>
+                                5) Исходным элементом чувственного познания является ощущение. (Да)</i></p>
+                            <p class="practice-answer">Ответ: 25</p>
+                        </div>
+                        <div class="practice-item">
+                            <p><strong>№3.</strong> Ниже приведён ряд признаков. Все они, за исключением двух, относятся
+                                к чувственному познанию.</p>
+                            <p><i>1) ощущение цвета, вкуса, запаха<br>
+                                2) абстрактность<br>
+                                3) наглядность<br>
+                                4) обобщённость<br>
+                                5) предметность<br>
+                                6) воспроизведение внешних сторон и свойств объектов</i></p>
+                            <p class="practice-answer">Ответ: 24</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="task-card" id="card-1.4_test_0">
+                <div class="task-q">📝 Тест 1: Что является исходным элементом чувственного познания?</div>
+                <div class="options-list">
+                    <label>
+                        <input type="radio" name="1.4_test_0" value="0">
+                        Понятие
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_0" value="1">
+                        Суждение
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_0" value="2">
+                        Ощущение
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_0" value="3">
+                        Умозаключение
+                    </label>
+                </div>
+                <button class="check-btn" onclick="checkTest('1.4', 0, 2)">✅ Проверить ответ</button>
+                <div id="msg-1.4_test_0" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_test_1">
+                <div class="task-q">📝 Тест 2: Какой уровень научного познания использует метод эксперимента?</div>
+                <div class="options-list">
+                    <label>
+                        <input type="radio" name="1.4_test_1" value="0">
+                        Теоретический
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_1" value="1">
+                        Эмпирический
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_1" value="2">
+                        Философский
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_1" value="3">
+                        Мифологический
+                    </label>
+                </div>
+                <button class="check-btn" onclick="checkTest('1.4', 1, 1)">✅ Проверить ответ</button>
+                <div id="msg-1.4_test_1" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_test_2">
+                <div class="task-q">📝 Тест 3: Что из перечисленного является формой рационального познания?</div>
+                <div class="options-list">
+                    <label>
+                        <input type="radio" name="1.4_test_2" value="0">
+                        Восприятие
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_2" value="1">
+                        Представление
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_2" value="2">
+                        Ощущение
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_2" value="3">
+                        Понятие
+                    </label>
+                </div>
+                <button class="check-btn" onclick="checkTest('1.4', 2, 3)">✅ Проверить ответ</button>
+                <div id="msg-1.4_test_2" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_test_3">
+                <div class="task-q">📝 Тест 4: Какой подход в гносеологии утверждает, что познание невозможно?</div>
+                <div class="options-list">
+                    <label>
+                        <input type="radio" name="1.4_test_3" value="0">
+                        Гносеологический оптимизм
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_3" value="1">
+                        Эмпиризм
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_3" value="2">
+                        Рационализм
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_3" value="3">
+                        Гносеологический пессимизм
+                    </label>
+                </div>
+                <button class="check-btn" onclick="checkTest('1.4', 3, 3)">✅ Проверить ответ</button>
+                <div id="msg-1.4_test_3" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_test_4">
+                <div class="task-q">📝 Тест 5: Что является критерием истины в познании?</div>
+                <div class="options-list">
+                    <label>
+                        <input type="radio" name="1.4_test_4" value="0">
+                        Логическая непротиворечивость
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_4" value="1">
+                        Практика
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_4" value="2">
+                        Интуиция
+                    </label>
+                    <label>
+                        <input type="radio" name="1.4_test_4" value="3">
+                        Авторитет учёного
+                    </label>
+                </div>
+                <button class="check-btn" onclick="checkTest('1.4', 4, 1)">✅ Проверить ответ</button>
+                <div id="msg-1.4_test_4" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_input_0">
+                <div class="task-q">✍️ Задание 1: Назовите три формы чувственного познания (цифры без пробелов): 1)
+                    Ощущение 2) Восприятие 3) Представление 4) Понятие
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-answer" id="val-1.4_input_0"
+                           placeholder="Введите ответ (цифры без пробелов)...">
+                    <button class="check-btn" onclick="checkInput('1.4', 0)">✅ Отправить</button>
+                </div>
+                <div id="msg-1.4_input_0" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_input_1">
+                <div class="task-q">✍️ Задание 2: Укажите три метода эмпирического уровня познания (цифры без пробелов):
+                    1) Наблюдение 2) Эксперимент 3) Формализация 4) Сравнение 5) Дедукция
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-answer" id="val-1.4_input_1"
+                           placeholder="Введите ответ (цифры без пробелов)...">
+                    <button class="check-btn" onclick="checkInput('1.4', 1)">✅ Отправить</button>
+                </div>
+                <div id="msg-1.4_input_1" class="status-msg"></div>
+            </div>
+            <div class="task-card" id="card-1.4_input_2">
+                <div class="task-q">✍️ Задание 3: Назовите три типа мышления (цифры без пробелов): 1) Образное 2)
+                    Теоретическое 3) Знаковое 4) Интуитивное
+                </div>
+                <div class="input-group">
+                    <input type="text" class="input-answer" id="val-1.4_input_2"
+                           placeholder="Введите ответ (цифры без пробелов)...">
+                    <button class="check-btn" onclick="checkInput('1.4', 2)">✅ Отправить</button>
+                </div>
+            </div>
+
+
+            <div id="msg-1.4_input_2" class="status-msg"></div>
+        </div>
+    </div>
+</div>
+<script>
+    let userProgress = JSON.parse(localStorage.getItem('ege_progress_v2') || '{}');
+    // Initialize the page with saved progress when loaded
+    document.addEventListener('DOMContentLoaded', function() {
+    initializeProgress();
+    });
+    function initializeProgress() {
+    // Process all test tasks
+    const allTestNames = []; // Track unique test names to avoid duplicates
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+    const nameParts = radio.name.split('_');
+    if (nameParts.length >= 3 && nameParts[1] === 'test') {
+    const testName = radio.name; // e.g., "1.3_test_0"
+    // Only process each test once
+    if (!allTestNames.includes(testName)) {
+    allTestNames.push(testName);
+    // Check if this test was previously completed
+    if (userProgress[testName] === true) {
+    // Find all radio buttons with this name
+    const testRadios = document.querySelectorAll(`input[name="${testName}"]`);
+    // Find the parent task card
+    if (testRadios.length > 0) {
+    const taskCard = testRadios[0].closest('.task-card');
+    if (taskCard) {
+    taskCard.classList.add('correct');
+    // Disable all radio buttons in this task
+    testRadios.forEach(r => r.disabled = true);
+    // Find and mark the correct answer based on the topic and test index
+    const nameParts = testName.split('_');
+    if (nameParts.length === 3) {
+    const topicId = nameParts[0]; // e.g., "1.3"
+    const testIdx = parseInt(nameParts[2]); // e.g., 0
+    // Get the correct answer for this topic and test
+    const correctAnswer = getCorrectAnswerForTest(topicId, testIdx);
+    // Mark the correct answer
+    testRadios.forEach((r, idx) => {
+    if (idx === correctAnswer) {
+    r.parentElement.classList.add('correct-answer'); // Add a class to highlight the correct answer
+    }
+    });
+    }
+    // Hide the check button
+    const checkBtn = taskCard.querySelector('.check-btn');
+    if (checkBtn) {
+    checkBtn.style.display = 'none';
+    }
+    // Show success message
+    const msgDiv = taskCard.querySelector('.status-msg');
+    if (msgDiv) {
+    msgDiv.textContent = '✅ Выполнено верно!';
+    msgDiv.className = 'status-msg msg-success';
+    }
+    }
+    }
+    }
+    }
+    }
+    });
+    // Process all input tasks
+    const allInputs = document.querySelectorAll('.input-answer');
+    allInputs.forEach(input => {
+    const idParts = input.id.split('_');
+    if (idParts.length >= 3 && idParts[1] === 'input') {
+    const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2]; // e.g., "1.3_input_0"
+    if (userProgress[taskId] === true) {
+    // Find the parent task card
+    const taskCard = input.closest('.task-card');
+    if (taskCard) {
+    taskCard.classList.add('correct');
+    // Disable the input
+    input.disabled = true;
+    // Hide the check button
+    const checkBtn = taskCard.querySelector('.check-btn');
+    if (checkBtn) {
+    checkBtn.style.display = 'none';
+    }
+    // Show success message
+    const msgDiv = taskCard.querySelector('.status-msg');
+    if (msgDiv) {
+    msgDiv.textContent = '✅ Выполнено верно!';
+    msgDiv.className = 'status-msg msg-success';
+    }
+    }
+    }
+    }
+    });
+    }
+    // Helper function to get the correct answer for a specific test
+    function getCorrectAnswerForTest(topicId, testIdx) {
+    if (topicId === "1.3") {
+    if (testIdx === 0) return 1; // Мотив
+    if (testIdx === 1) return 2; // Духовная
+    if (testIdx === 2) return 1; // Осознанность
+    if (testIdx === 3) return 2; // Фатализм
+    if (testIdx === 4) return 2; // Социальные нормы и законы
+    } else if (topicId === "1.4") {
+    if (testIdx === 0) return 2; // Ощущение
+    if (testIdx === 1) return 1; // Эмпирический
+    if (testIdx === 2) return 3; // Понятие
+    if (testIdx === 3) return 3; // Гносеологический пессимизм
+    if (testIdx === 4) return 1; // Практика
+    }
+    return -1; // Unknown
+    }
+    window.toggleTheory = function(btn) {
+    const content = btn.nextElementSibling;
+    const isExpanded = content.style.display === 'block';
+    content.style.display = isExpanded ? 'none' : 'block';
+    btn.innerHTML = `📖 ${isExpanded ? 'Показать полную теорию' : 'Скрыть теорию'}`;
+    };
+    window.checkTest = function(topicId, testIdx, correctOptionIdx) {
+    const taskId = `${topicId}_test_${testIdx}`;
+    const radios = document.getElementsByName(`${topicId}_test_${testIdx}`);
+    let selected = -1;
+    radios.forEach((r, i) => { if(r.checked) selected = i; });
+    const msgBlock = document.getElementById(`msg-${taskId}`);
+    const card = document.getElementById(`card-${taskId}`);
+    if (selected === -1) {
+    msgBlock.textContent = "⚠️ Выберите вариант ответа!";
+    msgBlock.className = "status-msg msg-error";
+    return;
+    }
+    if (selected === correctOptionIdx) {
+    msgBlock.textContent = "✅ Отлично! Правильный ответ!";
+    msgBlock.className = "status-msg msg-success";
+    card.className = "task-card correct";
+    // Disable all radio buttons in this task
+    radios.forEach(r => r.disabled = true);
+    // Mark the correct answer
+    radios.forEach((r, idx) => {
+    if (idx === correctOptionIdx) {
+    r.parentElement.classList.add('correct-answer');
+    }
+    });
+    // Hide the check button
+    const checkBtn = card.querySelector('.check-btn');
+    if (checkBtn) {
+    checkBtn.style.display = 'none';
+    }
+    saveProgress(`${topicId}_test_${testIdx}`, true, topicId);
+    } else {
+    msgBlock.textContent = `❌ Неверно.`;
+    msgBlock.className = "status-msg msg-error";
+    card.className = "task-card incorrect";
+
+    }
+    };
+    function getCorrectAnswerText(topicId, testIdx, correctOptionIdx) {
+    // Define the questions and options here
+    if (topicId === "1.3") {
+    if (testIdx === 0) {
+    return ["Цель", "Мотив", "Результат", "Средства"][correctOptionIdx];
+    } else if (testIdx === 1) {
+    return ["Материальная", "Социально-преобразовательная", "Духовная", "Практическая"][correctOptionIdx];
+    } else if (testIdx === 2) {
+    return ["Целесообразность", "Осознанность", "Инстинктивность", "Приспособление к среде"][correctOptionIdx];
+    } else if (testIdx === 3) {
+    return ["Волюнтаризм", "Гуманизм", "Фатализм", "Рационализм"][correctOptionIdx];
+    } else if (testIdx === 4) {
+    return ["Только природные законы", "Только личные желания", "Социальные нормы и законы", "Ничто не ограничивает"][correctOptionIdx];
+    }
+    } else if (topicId === "1.4") {
+    if (testIdx === 0) {
+    return ["Понятие", "Суждение", "Ощущение", "Умозаключение"][correctOptionIdx];
+    } else if (testIdx === 1) {
+    return ["Теоретический", "Эмпирический", "Философский", "Мифологический"][correctOptionIdx];
+    } else if (testIdx === 2) {
+    return ["Восприятие", "Представление", "Ощущение", "Понятие"][correctOptionIdx];
+    } else if (testIdx === 3) {
+    return ["Гносеологический оптимизм", "Эмпиризм", "Рационализм", "Гносеологический пессимизм"][correctOptionIdx];
+    } else if (testIdx === 4) {
+    return ["Логическая непротиворечивость", "Практика", "Интуиция", "Авторитет учёного"][correctOptionIdx];
+    }
+    }
+    return "Unknown";
+    }
+    window.checkInput = function(topicId, inputIdx) {
+    // Define the correct answers here
+    let correctAnswers = [];
+    if (topicId === "1.3") {
+    if (inputIdx === 0) {
+    correctAnswers = ["123", "124", "125", "126", "134", "135", "136", "145", "146", "156", "234", "235", "236", "245", "246", "256", "345", "346", "356", "456"];
+    } else if (inputIdx === 1) {
+    correctAnswers = ["1234"];
+    }
+    } else if (topicId === "1.4") {
+    if (inputIdx === 0) {
+    correctAnswers = ["123"];
+    } else if (inputIdx === 1) {
+    correctAnswers = ["124", "142", "214", "241", "412", "421"];
+    } else if (inputIdx === 2) {
+    correctAnswers = ["123"];
+    }
+    }
+    const taskId = `${topicId}_input_${inputIdx}`;
+    const inputVal = document.getElementById(`val-${taskId}`).value.toLowerCase().trim();
+    const msgBlock = document.getElementById(`msg-${taskId}`);
+    const card = document.getElementById(`card-${taskId}`);
+    if (!inputVal) {
+    msgBlock.textContent = "⚠️ Введите ответ!";
+    msgBlock.className = "status-msg msg-error";
+    return;
+    }
+    if (correctAnswers.some(ans => ans.toLowerCase() === inputVal)) {
+    msgBlock.textContent = "✅ Молодец! Правильно!";
+    msgBlock.className = "status-msg msg-success";
+    card.className = "task-card correct";
+    // Disable the input
+    const inputField = document.getElementById(`val-${taskId}`);
+    if (inputField) {
+    inputField.disabled = true;
+    }
+    // Hide the check button
+    const checkBtn = card.querySelector('.check-btn');
+    if (checkBtn) {
+    checkBtn.style.display = 'none';
+    }
+    saveProgress(taskId, true, topicId);
+    } else {
+    msgBlock.textContent = `❌ Неверно.`;
+    msgBlock.className = "status-msg msg-error";
+    card.className = "task-card incorrect";
+    }
+    };
+    function saveProgress(taskId, status, topicId) {
+    userProgress[taskId] = status;
+    localStorage.setItem('ege_progress_v2', JSON.stringify(userProgress));
+    }
+    window.goBack = function() {
+    window.location.href = 'index.html';
+    };
+</script>
+</body>
+</html>
+
