@@ -82,13 +82,38 @@
     </div>
 
     <script>
+        // Сохранение значений полей при изменении
+        function saveInputValues() {
+            const inputs = {
+                weekNum: document.getElementById('weekNum').value,
+                topic1Id: document.getElementById('topic1Id').value,
+                topic1Title: document.getElementById('topic1Title').value,
+                topic2Id: document.getElementById('topic2Id').value,
+                topic2Title: document.getElementById('topic2Title').value
+            };
+            localStorage.setItem('generator_inputs', JSON.stringify(inputs));
+        }
+
+        // Загрузка сохранённых значений полей
+        function loadInputValues() {
+            const saved = localStorage.getItem('generator_inputs');
+            if (saved) {
+                const inputs = JSON.parse(saved);
+                if (inputs.weekNum) document.getElementById('weekNum').value = inputs.weekNum;
+                if (inputs.topic1Id) document.getElementById('topic1Id').value = inputs.topic1Id;
+                if (inputs.topic1Title) document.getElementById('topic1Title').value = inputs.topic1Title;
+                if (inputs.topic2Id) document.getElementById('topic2Id').value = inputs.topic2Id;
+                if (inputs.topic2Title) document.getElementById('topic2Title').value = inputs.topic2Title;
+            }
+        }
+
         function generateWeekPage() {
             const weekNum = document.getElementById('weekNum').value;
             const topic1Id = document.getElementById('topic1Id').value;
             const topic1Title = document.getElementById('topic1Title').value;
             const topic2Id = document.getElementById('topic2Id').value;
             const topic2Title = document.getElementById('topic2Title').value;
-            
+
             const html = `<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -1034,7 +1059,9 @@
             allInputs.forEach(input => {
                 const idParts = input.id.split('_');
                 if (idParts.length >= 3 && idParts[1] === 'input') {
-                    const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2]; // e.g., "1.1_input_0"
+                    // Extract topic ID from the first part (e.g., "val-1.1" -> "1.1")
+                    const topicId = idParts[0].replace('val-', '');
+                    const taskId = topicId + '_input_' + idParts[2];
                     if (userProgress[taskId] === true) {
                         // Find the parent task card
                         const taskCard = input.closest('.task-card');
@@ -1217,8 +1244,21 @@
         
         // Generate initial page
         window.onload = function() {
+            loadInputValues();
             generateWeekPage();
         };
+
+        // Добавляем обработчики для автосохранения при изменении полей
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['weekNum', 'topic1Id', 'topic1Title', 'topic2Id', 'topic2Title'];
+            inputs.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('input', saveInputValues);
+                    el.addEventListener('change', saveInputValues);
+                }
+            });
+        });
     </script>
 </body>
 </html>

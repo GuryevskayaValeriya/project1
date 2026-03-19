@@ -1849,8 +1849,16 @@
             allInputs.forEach(input => {
                 const idParts = input.id.split('_');
                 if (idParts.length >= 3 && idParts[1] === 'input') {
-                    const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2]; // e.g., "1.1_input_0"
-                    if (userProgress[taskId] === true) {
+                    // Extract topic ID from the first part (e.g., "val-1.1" -> "1.1")
+                    const topicId = idParts[0].replace('val-', '');
+                    const taskId = topicId + '_input_' + idParts[2]; // e.g., "1.1_input_0"
+                    const savedData = userProgress[taskId];
+                    
+                    // Проверяем, сохранено ли задание (как объект или как boolean)
+                    const isCompleted = savedData === true || (savedData && savedData.status === true);
+                    const savedAnswer = savedData && savedData.answer ? savedData.answer : null;
+                    
+                    if (isCompleted) {
                         // Find the parent task card
                         const taskCard = input.closest('.task-card');
                         if (taskCard) {
@@ -1858,6 +1866,11 @@
 
                             // Disable the input
                             input.disabled = true;
+                            
+                            // Восстанавливаем сохранённый ответ
+                            if (savedAnswer) {
+                                input.value = savedAnswer;
+                            }
 
                             // Hide the check button
                             const checkBtn = taskCard.querySelector('.check-btn');
@@ -2027,7 +2040,8 @@
                     checkBtn.style.display = 'none';
                 }
 
-                saveProgress(taskId, true, topicId);
+                // Сохраняем прогресс с ответом
+                saveProgress(taskId, true, topicId, inputVal);
             } else {
                 msgBlock.textContent = `❌ Неверно.`;
                 msgBlock.className = "status-msg msg-error";
@@ -2035,8 +2049,13 @@
             }
         };
 
-        function saveProgress(taskId, status, topicId) {
-            userProgress[taskId] = status;
+        function saveProgress(taskId, status, topicId, answerValue = null) {
+            // Сохраняем как объект с статусом и ответом для input-заданий
+            if (answerValue !== null) {
+                userProgress[taskId] = { status: true, answer: answerValue };
+            } else {
+                userProgress[taskId] = status;
+            }
             localStorage.setItem('ege_progress_v2', JSON.stringify(userProgress));
         }
 

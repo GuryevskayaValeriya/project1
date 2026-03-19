@@ -321,7 +321,7 @@
                 <div id="msg-1.5_test_4" class="status-msg"></div>
             </div>
             <div class="task-card" id="card-1.5_input_0">
-                <div class="task-q">✍️ Задание 1: Назовите три вида истины (цифры без пробелов): 1) Абсолютная 2)
+                <div class="task-q">✍️ Задание 1: Назовите видыа истины (цифры без пробелов): 1) Абсолютная 2)
                     Относительная 3) Объективная 4) Субъективная 5) Теоретическая
                 </div>
                 <div class="input-group">
@@ -1066,7 +1066,9 @@
     allInputs.forEach(input => {
     const idParts = input.id.split('_');
     if (idParts.length >= 3 && idParts[1] === 'input') {
-    const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2]; // e.g., "1.5_input_0"
+    // Extract topic ID from the first part (e.g., "val-1.1" -> "1.1")
+    const topicId = idParts[0].replace('val-', '');
+    const taskId = topicId + '_input_' + idParts[2];
     if (userProgress[taskId] === true) {
     // Find the parent task card
     const taskCard = input.closest('.task-card');
@@ -1242,15 +1244,19 @@
     if (checkBtn) {
     checkBtn.style.display = 'none';
     }
-    saveProgress(taskId, true, topicId);
+    saveProgress(taskId, true, topicId, inputVal);
     } else {
     msgBlock.textContent = `❌ Неверно.`;
     msgBlock.className = "status-msg msg-error";
     card.className = "task-card incorrect";
     }
     };
-    function saveProgress(taskId, status, topicId) {
+    function saveProgress(taskId, status, topicId, answerValue = null) {
+    if (answerValue !== null) {
+    userProgress[taskId] = { status: true, answer: answerValue };
+    } else {
     userProgress[taskId] = status;
+    }
     localStorage.setItem('ege_progress_v2', JSON.stringify(userProgress));
     }
     window.goBack = function() {

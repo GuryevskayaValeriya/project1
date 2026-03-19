@@ -754,28 +754,30 @@
                     }
                 }
             } else {
+                // Для обычных тем используем topic.tasks как общее количество заданий
                 totalTasks += topic.tasks;
+                
+                // Собираем все возможные ID заданий для этой темы
+                const allTaskIds = new Set();
 
-                for (let i = 0; i < topic.tasks; i++) {
-                    const possibleIds = [
-                        `${topic.id}_test_${i}`,
-                        `${topic.id}_input_${i}`,
-                        `${topic.id}_${i}`,
-                        `task_${topic.id}_${i}`
-                    ];
-
-                    let taskCompleted = false;
-                    for (const id of possibleIds) {
-                        if (userProgress[id]) {
-                            taskCompleted = true;
-                            break;
-                        }
+                // Добавляем все ID из userProgress, которые принадлежат этой теме
+                Object.keys(userProgress).forEach(key => {
+                    if (key.startsWith(topic.id + '_') || key === topic.id) {
+                        allTaskIds.add(key);
                     }
+                });
 
-                    if (taskCompleted) {
-                        completedTasks++;
+                // Подсчитываем выполненные задания
+                let topicCompletedCount = 0;
+                allTaskIds.forEach(taskId => {
+                    const taskData = userProgress[taskId];
+                    // Проверяем: либо true, либо объект со status: true
+                    if (taskData === true || (taskData && taskData.status === true)) {
+                        topicCompletedCount++;
                     }
-                }
+                });
+
+                completedTasks += topicCompletedCount;
             }
         });
 
@@ -814,34 +816,30 @@
                 completedTasks += completedCount;
                 if (completedCount === topic.tasks) completedTopics++;
             } else {
+                // Для обычных тем подсчитываем фактически выполненные задания
+                // Собираем все возможные ID заданий для этой темы
+                const allTaskIds = new Set();
+                
+                // Добавляем все ID из userProgress, которые принадлежат этой теме
+                Object.keys(userProgress).forEach(key => {
+                    if (key.startsWith(topic.id + '_') || key === topic.id) {
+                        allTaskIds.add(key);
+                    }
+                });
+                
+                // Подсчитываем выполненные задания
                 let topicCompletedCount = 0;
-                let topicCompleted = true;
-
-                for (let i = 0; i < topic.tasks; i++) {
-                    const possibleIds = [
-                        `${topic.id}_test_${i}`,
-                        `${topic.id}_input_${i}`,
-                        `${topic.id}_${i}`,
-                        `task_${topic.id}_${i}`
-                    ];
-
-                    let taskCompleted = false;
-                    for (const id of possibleIds) {
-                        if (userProgress[id]) {
-                            taskCompleted = true;
-                            break;
-                        }
-                    }
-
-                    if (taskCompleted) {
+                allTaskIds.forEach(taskId => {
+                    const taskData = userProgress[taskId];
+                    // Проверяем: либо true, либо объект со status: true
+                    if (taskData === true || (taskData && taskData.status === true)) {
                         topicCompletedCount++;
-                    } else {
-                        topicCompleted = false;
                     }
-                }
+                });
 
                 completedTasks += topicCompletedCount;
-                if (topicCompleted) completedTopics++;
+                // Тема считается завершённой, если выполнено все задания (по данным из allTopics)
+                if (topicCompletedCount >= topic.tasks) completedTopics++;
             }
         });
 
