@@ -851,10 +851,42 @@
                 msgDiv.textContent = '✅ Выполнено верно!';
                 msgDiv.className = 'status-msg msg-success';
               }
+
+              // Show correct answer
+              const parts = taskId.split('_input_');
+              if (parts.length === 2) {
+                const topicId = parts[0];
+                const inputIdx = parseInt(parts[1]);
+                const correctAnswers = getCorrectAnswersForInput(topicId, inputIdx);
+                if (correctAnswers && correctAnswers.length > 0) {
+                  let answerDiv = taskCard.querySelector('.correct-answer-display');
+                  if (!answerDiv) {
+                    answerDiv = document.createElement('div');
+                    answerDiv.className = 'correct-answer-display';
+                    answerDiv.style.cssText = 'margin-top: 10px; padding: 10px 15px; background: #c6f6d5; border-radius: 8px; color: #22543d; font-weight: bold; font-size: 0.95em;';
+                    answerDiv.innerHTML = '✅ Правильный ответ: <span style="color: #276749;">' + correctAnswers.join(' / ') + '</span>';
+                    taskCard.appendChild(answerDiv);
+                  }
+                }
+              }
             }
           }
         }
       });
+    }
+
+    // Helper function to get correct answers for input tasks
+    function getCorrectAnswersForInput(topicId, inputIdx) {
+      if (topicId === "5.1") {
+        if (inputIdx === 0) return ["123"];
+        if (inputIdx === 1) return ["123"];
+        if (inputIdx === 2) return ["123"];
+      } else if (topicId === "5.2") {
+        if (inputIdx === 0) return ["1234"];
+        if (inputIdx === 1) return ["1234"];
+        if (inputIdx === 2) return ["12345"];
+      }
+      return [];
     }
 
     // Helper function to get the correct answer for a specific test
@@ -964,6 +996,15 @@
         if (inputField) inputField.disabled = true;
         const checkBtn = card.querySelector('.check-btn');
         if (checkBtn) checkBtn.style.display = 'none';
+        // Show correct answer
+        let answerDiv = card.querySelector('.correct-answer-display');
+        if (!answerDiv) {
+        answerDiv = document.createElement('div');
+        answerDiv.className = 'correct-answer-display';
+        answerDiv.style.cssText = 'margin-top: 10px; padding: 10px 15px; background: #c6f6d5; border-radius: 8px; color: #22543d; font-weight: bold; font-size: 0.95em;';
+        answerDiv.innerHTML = '✅ Правильный ответ: <span style="color: #276749;">' + correctAnswers.join(' / ') + '</span>';
+        card.appendChild(answerDiv);
+        }
         saveProgress(taskId, true, topicId);
       } else {
         msgBlock.textContent = `❌ Неверно.`;
