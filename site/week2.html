@@ -1178,7 +1178,7 @@
                     <div id="msg-1.3_test_4" class="status-msg"></div>
                 </div>
                 <div class="task-card" id="card-1.3_input_0">
-                    <div class="task-q">✍️ Задание 1: Назовите компоненты структуры деятельности (цифры без
+                    <div class="task-q">✍️ Задание 1: Назовите три компонента структуры деятельности (цифры без
                         пробелов): 1) Субъект 2) Объект 3) Мотив 4) Цель 5) Средства 6) Результат
                     </div>
                     <div class="input-group">
@@ -1189,7 +1189,7 @@
                     <div id="msg-1.3_input_0" class="status-msg"></div>
                 </div>
                 <div class="task-card" id="card-1.3_input_1">
-                    <div class="task-q">✍️ Задание 2: Укажите признаки деятельности человека (цифры без пробелов):
+                    <div class="task-q">✍️ Задание 2: Укажите три признака деятельности человека (цифры без пробелов):
                         1) Осуществляется для удовлетворения потребностей 2) Целенаправленность 3) Осознанность 4)
                         Свойственна только человеку 5) Инстинктивность
                     </div>
@@ -1790,7 +1790,7 @@
                 <div id="msg-1.4_test_4" class="status-msg"></div>
             </div>
             <div class="task-card" id="card-1.4_input_0">
-                <div class="task-q">✍️ Задание 1: Назовите формы чувственного познания (цифры без пробелов): 1)
+                <div class="task-q">✍️ Задание 1: Назовите три формы чувственного познания (цифры без пробелов): 1)
                     Ощущение 2) Восприятие 3) Представление 4) Понятие
                 </div>
                 <div class="input-group">
@@ -1801,7 +1801,7 @@
                 <div id="msg-1.4_input_0" class="status-msg"></div>
             </div>
             <div class="task-card" id="card-1.4_input_1">
-                <div class="task-q">✍️ Задание 2: Укажите методы эмпирического уровня познания (цифры без пробелов):
+                <div class="task-q">✍️ Задание 2: Укажите три метода эмпирического уровня познания (цифры без пробелов):
                     1) Наблюдение 2) Эксперимент 3) Формализация 4) Сравнение 5) Дедукция
                 </div>
                 <div class="input-group">
@@ -1812,7 +1812,7 @@
                 <div id="msg-1.4_input_1" class="status-msg"></div>
             </div>
             <div class="task-card" id="card-1.4_input_2">
-                <div class="task-q">✍️ Задание 3: Назовите типы мышления (цифры без пробелов): 1) Образное 2)
+                <div class="task-q">✍️ Задание 3: Назовите три типа мышления (цифры без пробелов): 1) Образное 2)
                     Теоретическое 3) Знаковое 4) Интуитивное
                 </div>
                 <div class="input-group">
@@ -1890,26 +1890,14 @@
     allInputs.forEach(input => {
     const idParts = input.id.split('_');
     if (idParts.length >= 3 && idParts[1] === 'input') {
-    // Extract topic ID from the first part (e.g., "val-1.1" -> "1.1")
-    const topicId = idParts[0].replace('val-', '');
-    const taskId = topicId + '_input_' + idParts[2];
-    const savedData = userProgress[taskId];
-    
-    // Проверяем, сохранено ли задание (как объект или как boolean)
-    const isCompleted = savedData === true || (savedData && savedData.status === true);
-    const savedAnswer = savedData && savedData.answer ? savedData.answer : null;
-    
-    if (isCompleted) {
+    const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2]; // e.g., "1.3_input_0"
+    if (userProgress[taskId] === true) {
     // Find the parent task card
     const taskCard = input.closest('.task-card');
     if (taskCard) {
     taskCard.classList.add('correct');
     // Disable the input
     input.disabled = true;
-    // Восстанавливаем сохранённый ответ
-    if (savedAnswer) {
-        input.value = savedAnswer;
-    }
     // Hide the check button
     const checkBtn = taskCard.querySelector('.check-btn');
     if (checkBtn) {
@@ -2056,20 +2044,15 @@
     if (checkBtn) {
     checkBtn.style.display = 'none';
     }
-    saveProgress(taskId, true, topicId, inputVal);
+    saveProgress(taskId, true, topicId);
     } else {
     msgBlock.textContent = `❌ Неверно.`;
     msgBlock.className = "status-msg msg-error";
     card.className = "task-card incorrect";
     }
     };
-    function saveProgress(taskId, status, topicId, answerValue = null) {
-    // Сохраняем как объект с статусом и ответом для input-заданий
-    if (answerValue !== null) {
-        userProgress[taskId] = { status: true, answer: answerValue };
-    } else {
-        userProgress[taskId] = status;
-    }
+    function saveProgress(taskId, status, topicId) {
+    userProgress[taskId] = status;
     localStorage.setItem('ege_progress_v2', JSON.stringify(userProgress));
     }
     window.goBack = function() {
