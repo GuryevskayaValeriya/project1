@@ -945,9 +945,10 @@
       // Process all input tasks
       const allInputs = document.querySelectorAll('.input-answer');
       allInputs.forEach(input => {
-        const idParts = input.id.split('_');
-        if (idParts.length >= 3 && idParts[1] === 'input') {
-          const taskId = idParts[0] + '_' + idParts[1] + '_' + idParts[2];
+        // ID has format "val-2.8_input_0", need to extract "2.8_input_0"
+        const idMatch = input.id.match(/^val-(.+)$/);
+        if (idMatch) {
+          const taskId = idMatch[1]; // e.g., "2.8_input_0"
           if (userProgress[taskId] === true) {
             const taskCard = input.closest('.task-card');
             if (taskCard) {
